@@ -1,0 +1,3 @@
+log4r_*.tar.gz
+log4r.Rcheck
+build_package.sh

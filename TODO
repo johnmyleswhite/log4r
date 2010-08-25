@@ -1,0 +1,6 @@
+(1) Put this snippet of code somewhere?
+    write.message(logger, '============ New Logging Session Opened ============')
+
+(2) Use gettextf() to implement a formatting system.
+
+(3) Fix warnings generated during package R CMD CHECK stage.

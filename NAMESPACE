@@ -1,0 +1,13 @@
+export("create.logger")
+export("debug")
+export("info")
+export("warn")
+export("error")
+export("fatal")
+export("logfile<-")
+export("logfile<-.logger")
+export("level<-")
+export("level<-.logger")
+export("format<-")
+export("format<-.logger")
+
