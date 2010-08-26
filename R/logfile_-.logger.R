@@ -1,7 +1,7 @@
 `logfile<-.logger` <-
 function(x, value)
 {
-  x[['path']] <- value
+  x[['logfile']] <- value
   return(x)
 }
 

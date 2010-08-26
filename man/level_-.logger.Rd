@@ -1,5 +1,6 @@
 \name{level<-.logger}
 \alias{level<-.logger}
+\alias{level<-}
 \title{
 Set the priority level for a logger object.
 }
@@ -20,6 +21,6 @@ level(x) <- value
 \examples{
 library('log4r')
 
-logger <- create.logger(path = 'debugging.log', level = log4r:::DEBUG)
+logger <- create.logger(logfile = 'debugging.log', level = log4r:::DEBUG)
 
 level(logger) <- log4r:::FATAL}

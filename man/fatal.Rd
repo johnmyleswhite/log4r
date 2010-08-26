@@ -20,6 +20,6 @@ fatal(logger, message)
 \examples{
 library('log4r')
 
-logger <- create.logger(path = 'fatal_error.log', level = log4r:::FATAL)
+logger <- create.logger(logfile = 'fatal_error.log', level = log4r:::FATAL)
 
 fatal(logger, 'Generating a fatal error message.')}

@@ -20,6 +20,6 @@ warn(logger, message)
 \examples{
 library('log4r')
 
-logger <- create.logger(path = 'warnings.log', level = log4r:::WARN)
+logger <- create.logger(logfile = 'warnings.log', level = log4r:::WARN)
 
 warn(logger, 'Generating an warning message.')}

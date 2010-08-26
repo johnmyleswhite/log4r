@@ -20,6 +20,6 @@ info(logger, message)
 \examples{
 library('log4r')
 
-logger <- create.logger(path = 'info.log', level = log4r:::INFO)
+logger <- create.logger(logfile = 'info.log', level = log4r:::INFO)
 
 info(logger, 'This is an informational message.')}

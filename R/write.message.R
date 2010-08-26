@@ -8,7 +8,6 @@ function(logger, message)
                          '\n',
                          sep = ' ')
   cat(output.string,
-      file = logger[['path']],
+      file = logger[['logfile']],
       append = TRUE)
 }
-

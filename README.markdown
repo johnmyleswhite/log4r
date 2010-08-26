@@ -1,5 +1,5 @@
 # Introduction
-The log4r package is meant to provide a clean object-oriented approach to
+The log4r package is meant to provide a clean, object-oriented approach to
 logging in R based roughly on the widely emulated log4j API. The example
 below shows how the logger is used in practice to print output to a
 log file.
@@ -25,13 +25,13 @@ following command from inside the cloned repository:
     # Set the current level of the logger.
     level(logger) <- log4r:::INFO
     
-    # Try logging messages.
+    # Try logging messages at different priority levels.
     debug(logger, 'A Debugging Message') # Won't print anything
     info(logger, 'An Info Message')
     warn(logger, 'A Warning Message')
     error(logger, 'An Error Message')
     fatal(logger, 'A Fatal Error Message')
-    
+
 # The log4r Priority Levels
 `log4r` supports five priority levels. In order from lowest to highest
 priority, they are:
@@ -43,8 +43,8 @@ priority, they are:
 * `log4r:::FATAL`
 
 # Keep in Mind
-* Calling `logfile(logger) <- file.path('logs', 'my.log')` will fail if the `logs` directory does not already exist.
-* Only messages at or above the current priority level are logged. Others are simply ignored.
+* Calling `logfile(logger) <- file.path('logs', 'my.log')` will fail if the `logs` directory does not already exist. In general, no effort is made to create non-existent directories.
+* Only messages at or above the current priority level are logged. Messages below this level are simply ignored.
 
 # Future Changes
 * `create.logger()` will become a singleton method to insure log integrity.

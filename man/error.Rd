@@ -20,6 +20,6 @@ error(logger, message)
 \examples{
 library('log4r')
 
-logger <- create.logger(path = 'error.log', level = log4r:::ERROR)
+logger <- create.logger(logfile = 'error.log', level = log4r:::ERROR)
 
 error(logger, 'Generating an error message.')}

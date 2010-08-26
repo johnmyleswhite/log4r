@@ -20,6 +20,6 @@ debug(logger, message)
 \examples{
 library('log4r')
 
-logger <- create.logger(path = 'debugging.log', level = log4r:::DEBUG)
+logger <- create.logger(logfile = 'debugging.log', level = log4r:::DEBUG)
 
 debug(logger, 'Testing our logger')}

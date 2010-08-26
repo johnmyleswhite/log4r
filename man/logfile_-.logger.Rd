@@ -1,5 +1,6 @@
 \name{logfile<-.logger}
 \alias{logfile<-.logger}
+\alias{logfile<-}
 \title{
 Set the logfile for a logger object.
 }

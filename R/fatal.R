@@ -10,4 +10,3 @@ function(logger, message)
     write.message(logger, paste('FATAL', message))
   }
 }
-

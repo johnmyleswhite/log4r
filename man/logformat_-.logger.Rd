@@ -1,5 +1,6 @@
-\name{format<-.logger}
-\alias{format<-.logger}
+\name{logformat<-.logger}
+\alias{logformat<-.logger}
+\alias{logformat<-}
 \title{
 Set the format string for a logger object.
 }
@@ -7,7 +8,7 @@ Set the format string for a logger object.
 Set the format string for a logger object.
 }
 \usage{
-format(x) <- value
+logformat(x) <- value
 }
 \arguments{
   \item{x}{
@@ -20,6 +21,6 @@ format(x) <- value
 \examples{
 library('log4r')
 
-logger <- create.logger(path = 'debugging.log', level = log4r:::DEBUG)
+logger <- create.logger(logfile = 'debugging.log', level = log4r:::DEBUG)
 
-format(logger) <- 'FORMAT STRING'}
+logformat(logger) <- 'FORMAT STRING'}

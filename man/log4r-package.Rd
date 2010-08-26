@@ -18,11 +18,6 @@ License: \tab Artistic-2.0\cr
 LazyLoad: \tab yes\cr
 }
 }
-\author{
-John Myles White
-
-Maintainer: John Myles White <jmw@johnmyleswhite.com>
-}
 \references{
 See the log4j documentation or the documentation for its many derivatives to
 understand the origins of this logging system.
