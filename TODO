@@ -3,4 +3,6 @@
 
 (2) Use gettextf() to implement a formatting system.
 
-(3) Fix warnings generated during package R CMD CHECK stage.
+(3) Find source of following unreproducible error:
+
+Error in logger[["level"]] : subscript out of bounds
