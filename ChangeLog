@@ -1,0 +1,5 @@
+2011-05-17	John Myles White  <jmw@johnmyleswhite.com>
+ 
+* v0.1-2
+* Messages for priority levels below the current level no longer produce NULLs
+* Refactored code
