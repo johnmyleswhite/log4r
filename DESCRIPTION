@@ -1,7 +1,7 @@
 Package: log4r
 Type: Package
 Title: A simple logging system for R, based on log4j.
-Version: 0.1-1
+Version: 0.1-3
 Date: 2010-08-24
 Author: John Myles White
 Maintainer: John Myles White <jmw@johnmyleswhite.com>
