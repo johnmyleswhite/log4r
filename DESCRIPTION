@@ -1,8 +1,8 @@
 Package: log4r
 Type: Package
 Title: A simple logging system for R, based on log4j.
-Version: 0.1-2
-Date: 2011-05-17
+Version: 0.1-3
+Date: 2011-06-23
 Author: John Myles White
 Maintainer: John Myles White <jmw@johnmyleswhite.com>
 Description: logr4 provides an object-oriented logging system that uses an API roughly equivalent to log4j and its related variants.
