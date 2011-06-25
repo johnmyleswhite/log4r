@@ -21,6 +21,7 @@
 	anything larger or equal than 5 will return  \code{log4r:::DEBUG}.
 }
 \examples{
+\dontrun{
 library(optparse)
 library(log4r)
 
@@ -40,4 +41,4 @@ error(my.logger, "Error message")
 warn(my.logger, "Warning message")
 info(my.logger, "Informational message")
 debug(my.logger, "Debugging message")
-}
+}}
