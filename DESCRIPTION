@@ -9,3 +9,4 @@ Description: logr4 provides an object-oriented logging system that uses an API r
 License: Artistic-2.0
 LazyLoad: yes
 Depends: testthat
+URL: https://github.com/johnmyleswhite/log4r
