@@ -12,8 +12,8 @@ LEVELS <- factor(LEVEL_NAMES, levels = LEVEL_NAMES, ordered = TRUE)
 #' @param x An object of class \code{"loglevel"}
 #' @param ... Unused
 #' @param v A verbosity level from the set 5..1. For historical reasons, they
-#'   do not match the log levels; a verbosity level of 2 corresponds to a
-#'   logging level of 4, and vice versa.
+#'   do not match the log levels; a verbosity level of 1 corresponds to a
+#'   logging level of 5, 2 corresponds to 4, etc.
 #' @return An object of class \code{"loglevel"}
 #' @examples
 #' loglevel(2) == loglevel("INFO")
