@@ -31,8 +31,6 @@ test_that('Logger levels', {
   level(logger) <- log4r:::FATAL
   expect_true(level(logger) == 5)
 
-  level(logger) <- log4r:::DEBUG
-
   unlink(logfile(logger))
 })
 
@@ -60,6 +58,32 @@ test_that('Creation of log file on first log entry', {
   expect_that(file.exists(logfile(logger)), is_true())
 
   unlink(logfile(logger))
+
+  fatal(logger, 'A Fatal Error Message')
+  expect_that(file.exists(logfile(logger)), is_true())
+
+  unlink(logfile(logger))
+})
+
+test_that('No creation of log file with insufficient level', {
+  logger <- create.logger()
+  logfile(logger) <- file.path('base.log')
+
+  level(logger) <- "INFO"
+  debug(logger, 'A Debugging Message')
+  expect_that(file.exists(logfile(logger)), is_false())
+
+  level(logger) <- "WARN"
+  info(logger, 'An Info Message')
+  expect_that(file.exists(logfile(logger)), is_false())
+
+  level(logger) <- "ERROR"
+  warn(logger, 'A Warning Message')
+  expect_that(file.exists(logfile(logger)), is_false())
+
+  level(logger) <- "FATAL"
+  error(logger, 'An Error Message')
+  expect_that(file.exists(logfile(logger)), is_false())
 
   fatal(logger, 'A Fatal Error Message')
   expect_that(file.exists(logfile(logger)), is_true())
