@@ -5,32 +5,37 @@ The log4r package is meant to provide a clean, lightweight object-oriented appro
 
 ## Installation
 - Stable CRAN version:
-
-        install.packages("log4r")
+    ```r
+    install.packages("log4r")
+    ```
 
 - Development version on GitHub:
 
-        devtools::install_github("johnmyleswhite/log4r")
+    ```r
+    devtools::install_github("johnmyleswhite/log4r")
+    ```
 
 ## Example Code
-    # Import the log4r package.
-    library('log4r')
+```r
+# Import the log4r package.
+library('log4r')
 
-    # Create a new logger object with create.logger().
-    logger <- create.logger()
+# Create a new logger object with create.logger().
+logger <- create.logger()
 
-    # Set the logger's file output: currently only allows flat files.
-    logfile(logger) <- file.path('base.log')
+# Set the logger's file output: currently only allows flat files.
+logfile(logger) <- file.path('base.log')
 
-    # Set the current level of the logger.
-    level(logger) <- log4r:::INFO
+# Set the current level of the logger.
+level(logger) <- log4r:::INFO
 
-    # Try logging messages at different priority levels.
-    debug(logger, 'A Debugging Message') # Won't print anything
-    info(logger, 'An Info Message')
-    warn(logger, 'A Warning Message')
-    error(logger, 'An Error Message')
-    fatal(logger, 'A Fatal Error Message')
+# Try logging messages at different priority levels.
+debug(logger, 'A Debugging Message') # Won't print anything
+info(logger, 'An Info Message')
+warn(logger, 'A Warning Message')
+error(logger, 'An Error Message')
+fatal(logger, 'A Fatal Error Message')
+```
 
 ## The log4r Priority Levels
 `log4r` supports five priority levels. In order from lowest to highest
