@@ -12,8 +12,8 @@ logr4 provides an object-oriented logging system that uses an API roughly equiva
 \tabular{ll}{
 Package: \tab log4r\cr
 Type: \tab Package\cr
-Version: \tab 0.1-2\cr
-Date: \tab 2010-08-24\cr
+Version: \tab 0.1-4.1\cr
+Date: \tab 2014-09-25\cr
 License: \tab Artistic-2.0\cr
 LazyLoad: \tab yes\cr
 }
