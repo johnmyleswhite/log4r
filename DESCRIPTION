@@ -5,8 +5,10 @@ Version: 0.1-4
 Date: 2012-02-29
 Author: John Myles White
 Maintainer: John Myles White <jmw@johnmyleswhite.com>
-Description: logr4 provides an object-oriented logging system that uses an API roughly equivalent to log4j and its related variants.
+Description: logr4 provides an object-oriented logging system that uses an API
+    roughly equivalent to log4j and its related variants.
 License: Artistic-2.0
 LazyLoad: yes
-Suggests: testthat
+Suggests:
+    testthat
 URL: https://github.com/johnmyleswhite/log4r
