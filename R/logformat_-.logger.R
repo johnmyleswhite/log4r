@@ -7,7 +7,7 @@
 #'
 #' library('log4r')
 #'
-#' logger <- create.logger(logfile = 'debugging.log', level = "DEBUG")
+#' logger <- create.logger(logfile = 'debugging.log', level = 'DEBUG')
 #'
 #' logformat(logger) <- 'FORMAT STRING'
 #' @export logformat<-.logger
