@@ -1,6 +1,5 @@
 #' Get or set the format string for a logger object.
 #'
-#' @aliases logformat.logger logformat
 #' @param x An object of class logger.
 #' @param value A string containing a proper format string.
 #' @examples
@@ -11,13 +10,29 @@
 #' print(logformat(logger))
 #' logformat(logger) <- 'FORMAT STRING'
 #' @export
+`logformat` <-
+  function(x)
+  {
+    UseMethod('logformat', x)
+  }
+
+#' @rdname logformat
+#' @export
+`logformat<-` <-
+function(x, value)
+{
+  UseMethod('logformat<-', x)
+}
+
+#' @rdname logformat
+#' @export
 `logformat.logger` <-
 function(x)
 {
   return(x[['logformat']])
 }
 
-#' @rdname logformat.logger
+#' @rdname logformat
 #' @export
 `logformat<-.logger` <-
   function(x, value)

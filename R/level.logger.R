@@ -6,7 +6,6 @@
 #' An object of class loglevel is also accepted; other input will be coerced
 #' using \code{\link{as.loglevel}}.
 #'
-#' @aliases level<-.logger level<-
 #' @param x An object of class logger.
 #' @param value A loglevel.
 #' @seealso \code{\link{loglevel}}
@@ -18,13 +17,29 @@
 #' level(logger)
 #' level(logger) <- "FATAL"
 #' @export
+`level` <-
+  function(x)
+  {
+    UseMethod('level', x)
+  }
+
+#' @rdname level
+#' @export
+`level<-` <-
+  function(x, value)
+  {
+    UseMethod('level<-', x)
+  }
+
+#' @rdname level
+#' @export
 `level.logger` <-
   function(x)
   {
     return(x[['level']])
   }
 
-#' @rdname level.logger
+#' @rdname level
 #' @export
 `level<-.logger` <-
   function(x, value)
