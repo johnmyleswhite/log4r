@@ -1,11 +1,5 @@
-DEBUG <- 1
-INFO <- 2
-WARN <- 3
-ERROR <- 4
-FATAL <- 5
-LEVELS <- seq(DEBUG, FATAL)
-
-
+LEVEL_NAMES <- c("DEBUG", "INFO", "WARN", "ERROR", "FATAL")
+LEVELS <- setNames(rev(seq_along(LEVEL_NAMES)), rev(LEVEL_NAMES))
 
 #' Converts an integer to a logging level
 #'
@@ -43,7 +37,31 @@ LEVELS <- seq(DEBUG, FATAL)
 #' @export verbosity
 verbosity <- function(i)
 {
-  i <- ifelse(i > max(LEVELS), max(LEVELS), i)
-  i <- ifelse(i < min(LEVELS), min(LEVELS), i)
-  return(LEVELS[max(LEVELS) - i + 1])
+  if (length(i) != 1)
+    stop("verbosity accepts only atomic values")
+
+  if (is.numeric(i)) {
+    i <- ifelse(i > max(LEVELS), max(LEVELS), i)
+    i <- ifelse(i < min(LEVELS), min(LEVELS), i)
+  } else if (is.character(i)) {
+    name <- i
+    i <- which(name == LEVEL_NAMES)
+    if (length(i) == 0)
+      stop("unknown verbosity level: ", name)
+  } else
+    stop("cannot determine verbosity from ", typeof(i), " ", i)
+
+  structure(LEVELS[max(LEVELS) - i + 1], class = "verbosity")
 }
+
+#' @export
+print.verbosity <- function(x, ...) cat(LEVEL_NAMES[[x]], "\n")
+
+#' @export
+as.numeric.verbosity <- function(x, ...) unclass(unname(x))
+
+DEBUG <- verbosity("DEBUG")
+INFO <- verbosity("INFO")
+WARN <- verbosity("WARN")
+ERROR <- verbosity("ERROR")
+FATAL <- verbosity("FATAL")
