@@ -25,7 +25,7 @@
 #' logfile(logger) <- 'base.log'
 #'
 #' # Set the current level of the logger.
-#' level(logger) <- log4r:::INFO
+#' level(logger) <- "INFO"
 #'
 #' # Try logging messages with different priorities.
 #' # At priority level INFO, a call to debug() won't print anything.
