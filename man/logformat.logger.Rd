@@ -2,21 +2,26 @@
 \name{logformat.logger}
 \alias{logformat}
 \alias{logformat.logger}
-\title{Get the format string for a logger object.}
+\alias{logformat<-.logger}
+\title{Get or set the format string for a logger object.}
 \usage{
 \method{logformat}{logger}(x)
+
+\method{logformat}{logger}(x) <- value
 }
 \arguments{
 \item{x}{An object of class logger.}
+
+\item{value}{A string containing a proper format string.}
 }
 \description{
-Get the format string for a logger object.
+Get or set the format string for a logger object.
 }
 \examples{
 library('log4r')
 
-logger <- create.logger(logfile = 'debugging.log', level = log4r:::DEBUG)
-
+logger <- create.logger(logfile = 'debugging.log', level = "DEBUG")
 print(logformat(logger))
+logformat(logger) <- 'FORMAT STRING'
 }
 
