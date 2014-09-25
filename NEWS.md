@@ -1,3 +1,5 @@
+* Use `testthat` subdirectory and `run-all.R` file for tests
+
 v0.1-4.2 (2014-09-25)
 ===
 
