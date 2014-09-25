@@ -1,3 +1,4 @@
+#' @export
 `logformat<-` <-
 function(x, value)
 {

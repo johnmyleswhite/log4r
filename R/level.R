@@ -1,3 +1,4 @@
+#' @export
 `level` <-
 function(x)
 {

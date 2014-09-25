@@ -1,3 +1,4 @@
+#' @export
 `logfile` <-
 function(x)
 {
