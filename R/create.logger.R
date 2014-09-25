@@ -14,7 +14,7 @@
 #' logger <- create.logger(logfile = 'debugging.log', level = "DEBUG")
 #' @export create.logger
 create.logger <-
-function(logfile = 'logfile.log', level = "FATAL", logformat = NULL)
+function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 {
   logger <- list(logfile = logfile,
                  level = as.loglevel(level),
