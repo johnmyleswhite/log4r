@@ -10,7 +10,7 @@ equivalent to log4j and its related variants.
 }
 \details{
 \tabular{ll}{ Package: \tab log4r\cr Type: \tab Package\cr Version: \tab
-0.1-2\cr Date: \tab 2010-08-24\cr License: \tab Artistic-2.0\cr LazyLoad:
+0.1-2\cr Date: \tab 2014-09-25\cr License: \tab Artistic-2.0\cr LazyLoad:
 \tab yes\cr }
 }
 \examples{
