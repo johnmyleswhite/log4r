@@ -4,12 +4,17 @@ library('log4r')
 
 context('Acceptance')
 
-test_that('Overall acceptance test', {
+test_that('Creation', {
   logger <- create.logger()
   expect_that(logger, is_a('logger'))
 
   logfile(logger) <- file.path('base.log')
   expect_that(logfile(logger), equals(file.path('base.log')))
+})
+
+test_that('Logger levels', {
+  logger <- create.logger()
+  logfile(logger) <- file.path('base.log')
 
   level(logger) <- log4r:::DEBUG
   expect_that(level(logger), equals(1))
@@ -29,6 +34,12 @@ test_that('Overall acceptance test', {
   level(logger) <- log4r:::DEBUG
 
   unlink(logfile(logger))
+})
+
+test_that('Creation of log file on first log entry', {
+  logger <- create.logger()
+  logfile(logger) <- file.path('base.log')
+  level(logger) <- log4r:::DEBUG
 
   debug(logger, 'A Debugging Message')
   expect_that(file.exists(logfile(logger)), is_true())
