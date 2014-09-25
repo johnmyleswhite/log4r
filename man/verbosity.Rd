@@ -23,10 +23,10 @@ library(optparse)
 library(log4r)
 
 optlist <- list(make_option(c('-v', '--verbosity-level'),
-														type = "integer",
-														dest = "verbosity",
-														default = 1,
-														help = "Verbosity threshold (5=DEBUG, 4=INFO 3=WARN, 2=ERROR, 1=FATAL)"))
+  type = "integer",
+  dest = "verbosity",
+  default = 1,
+  help = "Verbosity threshold (5=DEBUG, 4=INFO 3=WARN, 2=ERROR, 1=FATAL)"))
 
 optparser <- OptionParser(option_list=optlist)
 opt <- parse_args(optparser)
