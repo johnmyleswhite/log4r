@@ -4,9 +4,13 @@
 The log4r package is meant to provide a clean, lightweight object-oriented approach to logging in R based roughly on the widely emulated log4j API. The example code below shows how the logger is used in practice to print output to a simple plaintext log file.
 
 ## Installation
-At present, this package is not robust enough to be released on CRAN. If you would like to use it, please `git clone` this repository and then run the following command from inside the cloned repository:
+- Stable CRAN version:
 
-    R CMD INSTALL log4r_*.tar.gz
+        install.packages("log4r")
+
+- Development version on GitHub:
+
+        devtools::install_github("johnmyleswhite/log4r")
 
 ## Example Code
     # Import the log4r package.
