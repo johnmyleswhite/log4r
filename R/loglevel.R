@@ -74,6 +74,10 @@ is.loglevel <- function(x, ...) "loglevel" %in% class(x)
 
 #' @rdname loglevel
 #' @export
+as.loglevel <- loglevel
+
+#' @rdname loglevel
+#' @export
 print.loglevel <- function(x, ...) cat(LEVEL_NAMES[[x]], "\n")
 
 #' @rdname loglevel
