@@ -82,7 +82,11 @@ print.loglevel <- function(x, ...) cat(LEVEL_NAMES[[x]], "\n")
 
 #' @rdname loglevel
 #' @export
-as.numeric.loglevel <- function(x, ...) unclass(unname(as.numeric(x)))
+as.numeric.loglevel <- function(x, ...) unclass(unname(x))
+
+#' @rdname loglevel
+#' @export
+as.character.loglevel <- function(x, ...) LEVEL_NAMES[[x]]
 
 #' @rdname loglevel
 #' @export
