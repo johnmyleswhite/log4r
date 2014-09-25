@@ -3,9 +3,13 @@
 #' logr4 provides an object-oriented logging system that uses an API roughly
 #' equivalent to log4j and its related variants.
 #'
-#' \tabular{ll}{ Package: \tab log4r\cr Type: \tab Package\cr Version: \tab
-#' 0.1-2\cr Date: \tab 2014-09-25\cr License: \tab Artistic-2.0\cr LazyLoad:
-#' \tab yes\cr }
+#' \tabular{ll}{
+#' Package: \tab log4r\cr
+#' Type: \tab Package\cr
+#' Version: \tab 0.1-2\cr
+#' Date: \tab 2014-09-25\cr
+#' License: \tab Artistic-2.0\cr
+#' LazyLoad: \tab yes\cr }
 #'
 #' @name log4r-package
 #' @aliases log4r-package log4r
