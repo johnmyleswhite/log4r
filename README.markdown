@@ -1,4 +1,4 @@
-# log4r [![Travis-CI Build Status](https://travis-ci.org/johnmyleswhite/log4r.png?branch=master)](https://travis-ci.org/johnmyleswhite/log4r)
+# log4r [![Travis-CI Build Status](https://travis-ci.org/johnmyleswhite/log4r.png?branch=master)](https://travis-ci.org/johnmyleswhite/log4r) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johnmyleswhite/log4r?branch=master)](https://ci.appveyor.com/project/johnmyleswhite/log4r)
 
 ## Introduction
 The log4r package is meant to provide a clean, lightweight object-oriented approach to logging in R based roughly on the widely emulated log4j API. The example code below shows how the logger is used in practice to print output to a simple plaintext log file.
