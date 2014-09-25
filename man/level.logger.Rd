@@ -10,7 +10,7 @@
 \item{x}{An object of class logger.}
 }
 \description{
-Get the priority level for a logger object. This can be one of five levels:
+The priority level can be one of:
 \code{log4r:::DEBUG}, \code{log4r:::INFO}, \code{log4r:::WARN},
 \code{log4r:::ERROR} or \code{log4r:::FATAL}
 }
