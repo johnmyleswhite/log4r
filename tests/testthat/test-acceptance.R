@@ -17,19 +17,19 @@ test_that('Logger levels', {
   logfile(logger) <- file.path('base.log')
 
   level(logger) <- log4r:::DEBUG
-  expect_that(level(logger), equals(1))
+  expect_true(level(logger) == 1)
 
   level(logger) <- log4r:::INFO
-  expect_that(level(logger), equals(2))
+  expect_true(level(logger) == 2)
 
   level(logger) <- log4r:::WARN
-  expect_that(level(logger), equals(3))
+  expect_true(level(logger) == 3)
 
   level(logger) <- log4r:::ERROR
-  expect_that(level(logger), equals(4))
+  expect_true(level(logger) == 4)
 
   level(logger) <- log4r:::FATAL
-  expect_that(level(logger), equals(5))
+  expect_true(level(logger) == 5)
 
   level(logger) <- log4r:::DEBUG
 

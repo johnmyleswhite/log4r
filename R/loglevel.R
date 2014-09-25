@@ -1,17 +1,28 @@
+# Internal use only.
 LEVEL_NAMES <- c("DEBUG", "INFO", "WARN", "ERROR", "FATAL")
-LEVELS <- setNames(rev(seq_along(LEVEL_NAMES)), rev(LEVEL_NAMES))
+LEVELS <- factor(LEVEL_NAMES, levels = LEVEL_NAMES, ordered = TRUE)
 
-#' Converts an integer to a logging level
+#' Logging levels
 #'
-#' Converts an integer to an logging level defined in this package.
+#' Functions for handling logging levels.
 #'
-#'
-#' @param i An integer from the set 1..5. Otherwise it will be modified
-#' sensibly to fit in that range.
-#' @return A logging level from the \code{log4r:::LEVELS} array. Giving
-#' anything less or equal than 1 will return \code{log4r:::FATAL}. Giving
-#' anything larger or equal than 5 will return \code{log4r:::DEBUG}.
+#' @param i An integer from the set 1..5.  Otherwise it will be modified
+#'   sensibly to fit in that range.  Alternatively, a named logging level
+#'   (one of \Sexpr{paste0('"', log4r:::LEVEL_NAMES, '"', collapse = ", ")}).
+#' @param x An object of class \code{"loglevel"}
+#' @param ... Unused
+#' @param v A verbosity level from the set 5..1. For historical reasons, they
+#'   do not match the log levels; a verbosity level of 2 corresponds to a
+#'   logging level of 4, and vice versa.
+#' @return An object of class \code{"loglevel"}
 #' @examples
+#' loglevel(2) == loglevel("INFO")
+#' loglevel("WARN") < loglevel("ERROR")
+#' loglevel(-1)
+#' try(loglevel("UNDEFINED"))
+#' is.loglevel("DEBUG")
+#' is.loglevel(loglevel("DEBUG"))
+#' as.numeric(loglevel("FATAL"))
 #'
 #' \dontrun{
 #' library(optparse)
@@ -34,34 +45,52 @@ LEVELS <- setNames(rev(seq_along(LEVEL_NAMES)), rev(LEVEL_NAMES))
 #' info(my.logger, "Informational message")
 #' debug(my.logger, "Debugging message")
 #' }
-#' @export verbosity
-verbosity <- function(i)
+#' @export
+loglevel <- function(i)
 {
+  if (is.loglevel(i))
+    return(i)
+
   if (length(i) != 1)
-    stop("verbosity accepts only atomic values")
+    stop("loglevel accepts only atomic values")
 
   if (is.numeric(i)) {
-    i <- ifelse(i > max(LEVELS), max(LEVELS), i)
-    i <- ifelse(i < min(LEVELS), min(LEVELS), i)
+    i <- min(i, length(LEVELS))
+    i <- max(i, 1)
   } else if (is.character(i)) {
     name <- i
-    i <- which(name == LEVEL_NAMES)
+    i <- which(name == levels(LEVELS))
     if (length(i) == 0)
-      stop("unknown verbosity level: ", name)
+      stop("unknown logging level: ", name)
   } else
-    stop("cannot determine verbosity from ", typeof(i), " ", i)
+    stop("cannot determine loglevel from ", typeof(i), " ", i)
 
-  structure(LEVELS[max(LEVELS) - i + 1], class = "verbosity")
+  structure(LEVELS[[i]], class = "loglevel")
 }
 
+#' @rdname loglevel
 #' @export
-print.verbosity <- function(x, ...) cat(LEVEL_NAMES[[x]], "\n")
+is.loglevel <- function(x, ...) "loglevel" %in% class(x)
 
+#' @rdname loglevel
 #' @export
-as.numeric.verbosity <- function(x, ...) unclass(unname(x))
+print.loglevel <- function(x, ...) cat(LEVEL_NAMES[[x]], "\n")
 
-DEBUG <- verbosity("DEBUG")
-INFO <- verbosity("INFO")
-WARN <- verbosity("WARN")
-ERROR <- verbosity("ERROR")
-FATAL <- verbosity("FATAL")
+#' @rdname loglevel
+#' @export
+as.numeric.loglevel <- function(x, ...) unclass(unname(as.numeric(x)))
+
+#' @rdname loglevel
+#' @export
+verbosity <- function(v) {
+  if (!is.numeric(v))
+    stop("numeric expected")
+  loglevel(length(LEVELS) + 1 - v)
+}
+
+# Deprecated.
+DEBUG <- loglevel("DEBUG")
+INFO <- loglevel("INFO")
+WARN <- loglevel("WARN")
+ERROR <- loglevel("ERROR")
+FATAL <- loglevel("FATAL")
