@@ -6,9 +6,6 @@ git:
 master: git
 	test $$(git rev-parse --abbrev-ref HEAD) = "master"
 
-gh-pages:
-	git subtree split --prefix website --branch gh-pages
-
 rd:
 	crant -X
 
