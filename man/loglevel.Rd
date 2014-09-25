@@ -28,7 +28,7 @@ verbosity(v)
 sensibly to fit in that range.  Alternatively, a named logging level
 (one of \Sexpr{paste0('"', log4r:::LEVEL_NAMES, '"', collapse = ", ")}).}
 
-\item{x}{An object of class \code{"loglevel"}}
+\item{x}{An object of class "loglevel"}
 
 \item{...}{Unused}
 
@@ -37,7 +37,7 @@ do not match the log levels; a verbosity level of 1 corresponds to a
 logging level of 5, 2 corresponds to 4, etc.}
 }
 \value{
-An object of class \code{"loglevel"}
+An object of class "loglevel"
 }
 \description{
 Functions for handling logging levels.

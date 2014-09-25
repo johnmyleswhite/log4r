@@ -17,7 +17,7 @@ Set the format string for a logger object.
 \examples{
 library('log4r')
 
-logger <- create.logger(logfile = 'debugging.log', level = "DEBUG")
+logger <- create.logger(logfile = 'debugging.log', level = 'DEBUG')
 
 logformat(logger) <- 'FORMAT STRING'
 }
