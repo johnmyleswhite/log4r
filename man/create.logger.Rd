@@ -3,14 +3,14 @@
 \alias{create.logger}
 \title{Creates a logger object.}
 \usage{
-create.logger(logfile = "logfile.log", level = log4r:::FATAL,
-  logformat = NULL)
+create.logger(logfile = "logfile.log", level = "FATAL", logformat = NULL)
 }
 \arguments{
 \item{logfile}{The full pathname of the file you want log messages to be
 written to.}
 
-\item{level}{The level at which the logger is initialized.}
+\item{level}{The level at which the logger is initialized.  Will be coerced
+using \code{\link{as.loglevel}}.}
 
 \item{logformat}{The format string used when writing messages to the log
 file.}
@@ -21,6 +21,9 @@ Creates a logger object.
 \examples{
 library('log4r')
 
-logger <- create.logger(logfile = 'debugging.log', level = log4r:::DEBUG)
+logger <- create.logger(logfile = 'debugging.log', level = "DEBUG")
+}
+\seealso{
+\code{\link{loglevel}}, \code{\link{level.logger}}
 }
 

@@ -27,7 +27,7 @@ logger <- create.logger()
 logfile(logger) <- file.path('base.log')
 
 # Set the current level of the logger.
-level(logger) <- log4r:::INFO
+level(logger) <- "INFO"
 
 # Try logging messages at different priority levels.
 debug(logger, 'A Debugging Message') # Won't print anything
@@ -41,15 +41,18 @@ fatal(logger, 'A Fatal Error Message')
 `log4r` supports five priority levels. In order from lowest to highest
 priority, they are:
 
-* `log4r:::DEBUG`
-* `log4r:::INFO`
-* `log4r:::WARN`
-* `log4r:::ERROR`
-* `log4r:::FATAL`
+* `"DEBUG"`
+* `"INFO"`
+* `"WARN"`
+* `"ERROR"`
+* `"FATAL"`
 
 ## Keep in Mind
 * Calling `logfile(logger) <- file.path('logs', 'my.log')` will fail if the `logs` directory does not already exist. In general, no effort is made to create non-existent directories.
 * Only messages at or above the current priority level are logged. Messages below this level are simply ignored.
+* Using the internal priority level constants using the `:::` notation is
+  deprecated, but no warning is given.  It is safer to simply use strings
+  or numeric constants.
 
 ## Future Changes
 * `create.logger()` will become a singleton method to insure log integrity.
