@@ -10,6 +10,12 @@
 #' Date: \tab 2014-09-27\cr
 #' License: \tab Artistic-2.0\cr
 #' LazyLoad: \tab yes\cr }
+
+#' Maintainer: Kirill Müller <krlmlr+r@@mailbox.org>
+#'
+#' URL: \url{https://github.com/johnmyleswhite/log4r}
+#'
+#' Issue tracker: \url{https://github.com/johnmyleswhite/log4r/issues}
 #'
 #' @name log4r-package
 #' @aliases log4r-package log4r
