@@ -1,3 +1,5 @@
+* New maintainer: Kirill Müller (krlmlr+r@mailbox.org)
+
 v0.1-4.3 (2014-09-27)
 ===
 
