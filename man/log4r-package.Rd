@@ -12,8 +12,8 @@ equivalent to log4j and its related variants.
 \tabular{ll}{
 Package: \tab log4r\cr
 Type: \tab Package\cr
-Version: \tab 0.1-4.3\cr
-Date: \tab 2014-09-27\cr
+Version: \tab 0.1-5\cr
+Date: \tab 2014-09-28\cr
 License: \tab Artistic-2.0\cr
 LazyLoad: \tab yes\cr }
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
