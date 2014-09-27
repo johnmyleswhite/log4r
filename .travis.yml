@@ -5,10 +5,18 @@
 #   https://github.com/craigcitro/r-travis/wiki
 
 language: c
-script: _R_CHECK_CRAN_INCOMING_=FALSE ./travis-tool.sh run_tests
+script: _R_CHECK_CRAN_INCOMING_=TRUE ./travis-tool.sh run_tests
 env:
   global:
     - WARNINGS_ARE_ERRORS=1
+  matrix:
+    - RELEASE=trunk
+    - RELEASE=tags/R-3-1-1
+    - RELEASE=tags/R-3-1-0
+    - RELEASE=tags/R-3-0-3
+    - RELEASE=tags/R-3-0-2
+    - RELEASE=tags/R-3-0-1
+    - RELEASE=tags/R-3-0-0
 
 before_install:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
