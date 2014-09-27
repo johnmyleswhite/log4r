@@ -4,7 +4,14 @@ LEVELS <- factor(LEVEL_NAMES, levels = LEVEL_NAMES, ordered = TRUE)
 
 #' Logging levels
 #'
-#' Functions for handling logging levels.
+#' Functions for handling logging levels.  With each log entry, a logging level
+#' is associated that indicate its severity -- debugging output, informational
+#' output, warning message, error message or fatal error.  Each logger only
+#' prints log entries where the log level is equal or above its threshold.
+#'
+#' To specify a logging level, use a character value, e.g. \code{"WARN"},
+#' or an integer between 1 and 5. The function \code{available.levels} lists all
+#' possible logging levels.
 #'
 #' @param i An integer from the set 1..5.  Otherwise it will be modified
 #'   sensibly to fit in that range.  Alternatively, a named logging level
@@ -23,6 +30,7 @@ LEVELS <- factor(LEVEL_NAMES, levels = LEVEL_NAMES, ordered = TRUE)
 #' is.loglevel("DEBUG")
 #' is.loglevel(loglevel("DEBUG"))
 #' as.numeric(loglevel("FATAL"))
+#' available.loglevels()
 #'
 #' \dontrun{
 #' library(optparse)
@@ -87,6 +95,10 @@ as.numeric.loglevel <- function(x, ...) unclass(unname(x))
 #' @rdname loglevel
 #' @export
 as.character.loglevel <- function(x, ...) LEVEL_NAMES[[x]]
+
+#' @rdname loglevel
+#' @export
+available.loglevels <- function() lapply(setNames(nm = LEVEL_NAMES), loglevel)
 
 #' @rdname loglevel
 #' @export

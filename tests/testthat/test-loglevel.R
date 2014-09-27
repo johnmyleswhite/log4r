@@ -31,3 +31,7 @@ test_that('Coercion', {
   expect_equal(as.character(loglevel("WARN")), "WARN")
   expect_equal(as.loglevel(loglevel("INFO")), loglevel("INFO"))
 })
+
+test_that('Available log levels', {
+  expect_equal(unname(vapply(available.loglevels(), as.integer, integer(1))), 1:5)
+})

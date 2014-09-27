@@ -3,6 +3,7 @@
 \alias{as.character.loglevel}
 \alias{as.loglevel}
 \alias{as.numeric.loglevel}
+\alias{available.loglevels}
 \alias{is.loglevel}
 \alias{loglevel}
 \alias{print.loglevel}
@@ -20,6 +21,8 @@ as.loglevel(i)
 \method{as.numeric}{loglevel}(x, ...)
 
 \method{as.character}{loglevel}(x, ...)
+
+available.loglevels()
 
 verbosity(v)
 }
@@ -40,7 +43,15 @@ logging level of 5, 2 corresponds to 4, etc.}
 An object of class "loglevel"
 }
 \description{
-Functions for handling logging levels.
+Functions for handling logging levels.  With each log entry, a logging level
+is associated that indicate its severity -- debugging output, informational
+output, warning message, error message or fatal error.  Each logger only
+prints log entries where the log level is equal or above its threshold.
+}
+\details{
+To specify a logging level, use a character value, e.g. \code{"WARN"},
+or an integer between 1 and 5. The function \code{available.levels} lists all
+possible logging levels.
 }
 \examples{
 loglevel(2) == loglevel("INFO")
@@ -50,6 +61,7 @@ try(loglevel("UNDEFINED"))
 is.loglevel("DEBUG")
 is.loglevel(loglevel("DEBUG"))
 as.numeric(loglevel("FATAL"))
+available.loglevels()
 
 \dontrun{
 library(optparse)
