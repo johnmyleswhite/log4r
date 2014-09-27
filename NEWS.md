@@ -1,3 +1,6 @@
+v0.1-4.3 (2014-09-27)
+===
+
 * Log levels are now objects of class `"loglevel"`, access to the hidden
   constants, e.g., `log4r:::DEBUG`, is deprecated (#4).
 * Combined documentation: Several functions are shown on the same help page
