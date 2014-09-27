@@ -11,7 +11,7 @@
 #' License: \tab Artistic-2.0\cr
 #' LazyLoad: \tab yes\cr }
 
-#' Maintainer: Kirill Müller <krlmlr+r@@mailbox.org>
+#' Maintainer: Kirill Mueller <krlmlr+r@@mailbox.org>
 #'
 #' URL: \url{https://github.com/johnmyleswhite/log4r}
 #'
