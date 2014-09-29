@@ -1,6 +1,11 @@
 \name{NEWS}
 \title{News for Package 'log4r'}
 \encoding{UTF-8}
+\section{Changes in log4r version 0.2 (2014-09-29)}{
+  \itemize{
+    \item Same as v0.1-5.
+  }
+}
 \section{Changes in log4r version 0.1-5 (2014-09-28)}{
   \itemize{
     \item New maintainer: Kirill Müller (krlmlr+r@mailbox.org)
