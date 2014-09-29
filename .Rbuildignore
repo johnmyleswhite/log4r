@@ -6,3 +6,4 @@
 ^NEWS[.]md$
 ^NEWS[.]md[.]tmpl$
 ^README[.]markdown$
+^cran-comments.md$
