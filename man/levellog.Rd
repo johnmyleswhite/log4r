@@ -41,7 +41,7 @@ debug(logger, 'Debugging our code')
 info(logger, 'Information about our code')
 warn(logger, 'Another warning from our code')
 error(logger, 'An error from our code')
-fatal(logger, 'I\\'m outta here')
+fatal(logger, "I'm outta here")
 }
 \seealso{
 \code{\link{loglevel}}

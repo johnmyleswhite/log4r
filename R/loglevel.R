@@ -98,7 +98,7 @@ as.character.loglevel <- function(x, ...) LEVEL_NAMES[[x]]
 
 #' @rdname loglevel
 #' @export
-available.loglevels <- function() lapply(setNames(nm = LEVEL_NAMES), loglevel)
+available.loglevels <- function() lapply(stats::setNames(nm = LEVEL_NAMES), loglevel)
 
 #' @rdname loglevel
 #' @export
