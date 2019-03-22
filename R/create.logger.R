@@ -24,3 +24,18 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 
   return(logger)
 }
+
+#' @export
+logger <- function(threshold = "INFO", appenders = console_appender()) {
+  threshold <- as.loglevel(threshold)
+  if (!is.list(appenders)) {
+    appenders <- list(appenders)
+  }
+  if (!all(vapply(appenders, is.function, logical(1)))) {
+    stop("Appenders must be functions.", call. = FALSE)
+  }
+  structure(
+    list(threshold = threshold, appenders = appenders),
+    class = "logger"
+  )
+}
