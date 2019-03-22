@@ -16,13 +16,12 @@
 create.logger <-
 function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 {
-  logger <- list(logfile = logfile,
-                 level = as.loglevel(level),
-                 logformat = logformat)
-
-  class(logger) <- 'logger'
-
-  return(logger)
+  # TODO: Should we issue a deprecation message?
+  out <- logger(
+    threshold = level, appenders = file_appender(file = logfile)
+  )
+  out$logfile <- logfile
+  out
 }
 
 #' @export

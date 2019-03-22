@@ -28,17 +28,16 @@
 
 #' @rdname logfile
 #' @export
-`logfile.logger` <-
-  function(x)
-  {
-    return(x[['logfile']])
-  }
+`logfile.logger` <- function(x) x$logfile
 
 #' @rdname logfile
 #' @export
-`logfile<-.logger` <-
-  function(x, value)
-  {
-    x[['logfile']] <- value
-    return(x)
+`logfile<-.logger` <- function(x, value) {
+  # For loggers created with the old API, change the appender. Otherwise, do
+  # nothing.
+  if (!is.null(x$logfile)) {
+    x$appenders <- list(file_appender(file = value))
+    x$logfile <- value
   }
+  x
+}
