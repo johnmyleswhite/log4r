@@ -62,6 +62,7 @@ logger <- function(threshold = "INFO", appenders = console_appender()) {
   if (!all(vapply(appenders, is.function, logical(1)))) {
     stop("Appenders must be functions.", call. = FALSE)
   }
+  appenders <- lapply(appenders, compiler::cmpfun)
   structure(
     list(threshold = threshold, appenders = appenders),
     class = "logger"
