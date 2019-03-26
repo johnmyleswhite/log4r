@@ -9,7 +9,7 @@
 #' @rdname basic_appenders
 #' @aliases basic_appenders console_appender
 #' @export
-console_appender <- function(layout = default_log_layout) {
+console_appender <- function(layout = default_log_layout()) {
   file_appender(file = "", layout = layout)
 }
 
@@ -20,7 +20,7 @@ console_appender <- function(layout = default_log_layout) {
 #' @rdname basic_appenders
 #' @aliases file_appender
 #' @export
-file_appender <- function(file, append = TRUE, layout = default_log_layout) {
+file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
   stopifnot(is.function(layout))
   function(level, ...) {
     msg <- layout(level, ...)

@@ -4,12 +4,11 @@
 \alias{default_log_layout}
 \title{Default Log Message Layout}
 \usage{
-default_log_layout(level, ...)
+default_log_layout(time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
 }
 \arguments{
-\item{level}{The message level.}
-
-\item{...}{Additional message arguments.}
+\item{time_format}{A valid format string for timestamps. See
+\code{\link[base]{strptime}}.}
 }
 \description{
 Default Log Message Layout

@@ -6,9 +6,9 @@
 \alias{file_appender}
 \title{Append Logs to a File or the Console}
 \usage{
-console_appender(layout = default_log_layout)
+console_appender(layout = default_log_layout())
 
-file_appender(file, append = TRUE, layout = default_log_layout)
+file_appender(file, append = TRUE, layout = default_log_layout())
 }
 \arguments{
 \item{layout}{A layout function taking a \code{level} parameter and
