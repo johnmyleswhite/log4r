@@ -28,20 +28,55 @@ levellog <- function(logger, level, message) {
 
 #' @rdname levellog
 #' @export
-debug <- function(logger, message) { levellog(logger, message, level = DEBUG) }
+debug <- function(logger, message) log_debug(logger, message)
+
+log_debug <- function(logger, ...) {
+  if (logger$threshold > DEBUG) return(invisible(NULL))
+  for (appender in logger$appenders) {
+    appender("DEBUG", ...)
+  }
+}
 
 #' @rdname levellog
 #' @export
-info <- function(logger, message) { levellog(logger, message, level = INFO) }
+info <- function(logger, message) log_info(logger, message)
+
+log_info <- function(logger, ...) {
+  if (logger$threshold > INFO) return(invisible(NULL))
+  for (appender in logger$appenders) {
+    appender("INFO", ...)
+  }
+}
 
 #' @rdname levellog
 #' @export
-warn <- function(logger, message) { levellog(logger, message, level = WARN) }
+warn <- function(logger, message) log_warn(logger, message)
+
+log_warn <- function(logger, ...) {
+  if (logger$threshold > WARN) return(invisible(NULL))
+  for (appender in logger$appenders) {
+    appender("WARN", ...)
+  }
+}
 
 #' @rdname levellog
 #' @export
-error <- function(logger, message) { levellog(logger, message, level = ERROR) }
+error <- function(logger, message) log_error(logger, message)
+
+log_error <- function(logger, ...) {
+  if (logger$threshold > ERROR) return(invisible(NULL))
+  for (appender in logger$appenders) {
+    appender("ERROR", ...)
+  }
+}
 
 #' @rdname levellog
 #' @export
-fatal <- function(logger, message) { levellog(logger, message, level = FATAL) }
+fatal <- function(logger, message) log_fatal(logger, message)
+
+log_fatal <- function(logger, ...) {
+  # NOTE: It should not be possible to have a higher threshold, so don't check.
+  for (appender in logger$appenders) {
+    appender("FATAL", ...)
+  }
+}
