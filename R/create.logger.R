@@ -24,6 +24,21 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
   out
 }
 
+#' Create Logger Objects
+#'
+#' This is the main interface for configuring logging behaviour. We adopt the
+#' well-known \href{https://logging.apache.org/log4j/}{log4j} etymology:
+#' \strong{appenders} are destinations (e.g. the console or a file) where messages
+#' are written, and the \strong{layout} is the format of the messages. Both
+#' appenders and layouts must be implemented as functions.
+#'
+#' @param threshold The logging threshold level. Messages with a lower priority
+#'   level will be discarded. See \code{\link{loglevel}}.
+#' @param appenders The logging appenders; both single appenders and a
+#'   \code{list()} of them are supported.
+#'
+#' @return An object of class \code{"logger"}.
+#'
 #' @export
 logger <- function(threshold = "INFO", appenders = console_appender()) {
   threshold <- as.loglevel(threshold)
