@@ -33,13 +33,14 @@
 default_log_layout <- function(time_format = "%Y-%m-%d %H:%M:%S") {
   stopifnot(is.character(time_format))
 
+  # Check that the time format works.
+  if (inherits(fmt_current_time(time_format), "try-error")) {
+    stop("Invalid strptime format string. See ?strptime.")
+  }
+
   function(level, ...) {
     msg <- paste0(..., collapse = "")
-    # This appears to be the fastest way to format timestamps.
-    time_fmt <- format.POSIXlt(
-      as.POSIXlt(Sys.time()), format = time_format, usetz = FALSE
-    )
-    sprintf("%-5s [%s] %s\n", level, time_fmt, msg)
+    sprintf("%-5s [%s] %s\n", level, fmt_current_time(time_format), msg)
   }
 }
 
@@ -51,4 +52,9 @@ simple_log_layout <- function() {
     msg <- paste0(..., collapse = "")
     sprintf("%-5s - %s\n", level, msg)
   }
+}
+
+# Fast C wrapper of strftime() and localtime(). Use with caution.
+fmt_current_time <- function(format) {
+  .Call(R_fmt_current_time, format)
 }

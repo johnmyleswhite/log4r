@@ -44,4 +44,5 @@
 #' warn(logger, 'A Warning Message')
 #' error(logger, 'An Error Message')
 #' fatal(logger, 'A Fatal Error Message')
+#' @useDynLib log4r, .registration = TRUE
 NULL
