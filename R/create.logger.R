@@ -28,16 +28,30 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #'
 #' This is the main interface for configuring logging behaviour. We adopt the
 #' well-known \href{https://logging.apache.org/log4j/}{log4j} etymology:
-#' \strong{appenders} are destinations (e.g. the console or a file) where messages
-#' are written, and the \strong{layout} is the format of the messages. Both
-#' appenders and layouts must be implemented as functions.
+#' \strong{\link[=appenders]{Appenders}} are destinations (e.g. the console or
+#' a file) where messages are written, and the \strong{\link[=layouts]{Layout}}
+#' is the format of the messages.
 #'
 #' @param threshold The logging threshold level. Messages with a lower priority
 #'   level will be discarded. See \code{\link{loglevel}}.
 #' @param appenders The logging appenders; both single appenders and a
-#'   \code{list()} of them are supported.
+#'   \code{list()} of them are supported. See \code{\link{appenders}}.
 #'
 #' @return An object of class \code{"logger"}.
+#'
+#' @examples
+#' # By default, messages are logged to the console at the
+#' # "INFO" threshold.
+#' logger <- logger()
+#'
+#' info(logger, "Located nearest gas station.")
+#' warn(logger, "Ez-Gas sensor network is not available.")
+#' debug(logger, "Debug messages are suppressed by default.")
+#'
+#' @seealso
+#'
+#' \strong{\link[=appenders]{Appenders}} and \strong{\link[=layouts]{Layouts}}
+#' for information on controlling the behaviour of the logger object.
 #'
 #' @export
 logger <- function(threshold = "INFO", appenders = console_appender()) {
