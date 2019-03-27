@@ -6,7 +6,7 @@ log4r [![Travis-CI Build Status](https://travis-ci.org/johnmyleswhite/log4r.png?
 Introduction
 ------------
 
-The log4r package is meant to provide a clean, lightweight object-oriented approach to logging in R based roughly on the widely emulated log4j API. The example code below shows how the logger is used in practice to print output to a simple plaintext log file.
+The log4r package is meant to provide a clean, lightweight object-oriented approach to logging in R based roughly on the widely-emulated log4j API.
 
 Installation
 ------------
@@ -23,28 +23,71 @@ install.packages("log4r")
 devtools::install_github("johnmyleswhite/log4r")
 ```
 
-Example Code
-------------
+Usage
+-----
+
+Logging is configured by passing around `logger` objects created by `logger()`. By default, this will log to the console and suppress messages below the `"INFO"` level:
 
 ``` r
-# Import the log4r package.
-library('log4r')
+logger <- logger()
 
-# Create a new logger object with create.logger().
+info(logger, "Located nearest gas station.")
+#> INFO  [2019-03-26 18:35:08] Located nearest gas station.
+warn(logger, "Ez-Gas sensor network is not available.")
+#> WARN  [2019-03-26 18:35:08] Ez-Gas sensor network is not available.
+debug(logger, "Debug messages are suppressed by default.")
+```
+
+Logging destinations are controlled by **Appenders**, a few of which are provided by the package. For instance, if we want to debug-level messages to a file:
+
+``` r
+log_file <- tempfile()
+logger <- logger("DEBUG", appenders = file_appender(log_file))
+
+info(logger, "Messages are now written to the file instead.")
+debug(logger, "Debug messages are now visible.")
+
+readLines(log_file)
+#> [1] "INFO  [2019-03-26 18:35:08] Messages are now written to the file instead."
+#> [2] "DEBUG [2019-03-26 18:35:08] Debug messages are now visible."
+```
+
+The `appenders` parameter takes a list, so you can log to multiple destinations transparently.
+
+To control the format of the messages you can change the **Layout** used by each appender. Layouts are functions; you can write your own quite easily:
+
+``` r
+my_layout <- function(level, ...) {
+  paste0(format(Sys.time()), " [", level, "] ", ..., collapse = "")
+}
+
+logger <- logger(appenders = console_appender(my_layout))
+info(logger, "Messages should now look a little different.")
+#> 2019-03-26 18:35:08 [INFO] Messages should now look a little different.
+```
+
+Older APIs
+----------
+
+The 0.2 API is still supported:
+
+``` r
 logger <- create.logger()
 
-# Set the logger's file output: currently only allows flat files.
-logfile(logger) <- file.path('base.log')
-
-# Set the current level of the logger.
+logfile(logger) <- log_file
 level(logger) <- "INFO"
 
-# Try logging messages at different priority levels.
-debug(logger, 'A Debugging Message') # Won't print anything
+debug(logger, 'A Debugging Message')
 info(logger, 'An Info Message')
 warn(logger, 'A Warning Message')
 error(logger, 'An Error Message')
 fatal(logger, 'A Fatal Error Message')
+
+readLines(log_file)
+#> [1] "INFO  [2019-03-26 18:35:08] An Info Message"      
+#> [2] "WARN  [2019-03-26 18:35:08] A Warning Message"    
+#> [3] "ERROR [2019-03-26 18:35:08] An Error Message"     
+#> [4] "FATAL [2019-03-26 18:35:08] A Fatal Error Message"
 ```
 
 The log4r Priority Levels
@@ -61,15 +104,8 @@ The log4r Priority Levels
 Keep in Mind
 ------------
 
--   Calling `logfile(logger) <- file.path('logs', 'my.log')` will fail if the `logs` directory does not already exist. In general, no effort is made to create non-existent directories.
+-   Use a log file in a non-existent directory will fail. In general, no effort is made to create directories.
 
--   Only messages at or above the current priority level are logged. Messages below this level are simply ignored.
+-   Only messages at or above the current threshold are logged. Messages below this level are simply ignored.
 
 -   Using the internal priority level constants using the `:::` notation is deprecated, but no warning is given. It is safer to simply use strings or numeric constants.
-
-Future Changes
---------------
-
--   `create.logger()` will become a singleton method to insure log integrity.
-
--   Future versions of log4r will respect the format attribute of logger objects.

@@ -33,18 +33,11 @@
 
 #' @rdname level
 #' @export
-`level.logger` <-
-  function(x)
-  {
-    return(x[['level']])
-  }
+`level.logger` <- function(x) x$threshold
 
 #' @rdname level
 #' @export
-`level<-.logger` <-
-  function(x, value)
-  {
-    x[['level']] <- as.loglevel(value)
-    return(x)
-  }
-
+`level<-.logger` <- function(x, value) {
+  x$threshold <- as.loglevel(value)
+  x
+}

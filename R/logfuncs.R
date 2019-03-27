@@ -20,8 +20,10 @@
 #' @export
 levellog <- function(logger, level, message) {
   level <- as.loglevel(level)
-  if (logger[['level']] <= level)
-    write.message(logger, paste(as.character(level), message))
+  if (logger$threshold > level) return(invisible(NULL))
+  for (appender in logger$appenders) {
+    appender(level, message)
+  }
 }
 
 #' @rdname levellog
