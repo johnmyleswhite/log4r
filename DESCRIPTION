@@ -6,7 +6,9 @@ Authors@R: c(
     person("John Myles", "White", role = c("aut", "cph")),
     person("Kenton", "White", role = "ctb"),
     person("Kirill", "Müller", email = "krlmlr+r@mailbox.org",
-           role = c("ctb", "cre"))
+           role = "ctb"),
+    person("Aaron", "Jacobs", email = "atheriel@gmail.com",
+           role = c("aut", "cre"))
     )
 Description: logr4 provides an object-oriented logging system that
     uses an API roughly equivalent to log4j and its related variants.
