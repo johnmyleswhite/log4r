@@ -1,6 +1,6 @@
 Type: Package
 Package: log4r
-Title: A simple logging system for R, based on log4j
+Title: A Simple Logging System for R, Based on 'log4j'
 Version: 0.2.9000
 Authors@R: c(
     person("John Myles", "White", role = c("aut", "cph")),
