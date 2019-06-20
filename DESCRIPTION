@@ -17,7 +17,15 @@ License: Artistic-2.0
 URL: https://github.com/johnmyleswhite/log4r
 BugReports: https://github.com/johnmyleswhite/log4r/issues
 Suggests:
+    futile.logger,
+    knitr,
+    lgr,
+    logger,
+    logging,
+    microbenchmark,
+    rmarkdown,
     testthat
 Encoding: UTF-8
 LazyLoad: yes
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

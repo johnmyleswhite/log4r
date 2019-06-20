@@ -6,3 +6,4 @@ upload.sh
 .RData
 src/*.o
 src/*.so
+inst/doc

@@ -1,0 +1,209 @@
+---
+title: "Logging Performance"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{performance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The following vignette presents benchmarks for **log4r** against all
+general-purpose logging packages available on CRAN:
+
+- [**futile.logger**](https://cran.r-project.org/package=futile.logger) and
+  [**logging**](https://cran.r-project.org/package=logging), which are
+  well-established packages; and
+- [**logger**](https://cran.r-project.org/package=logger) and [**lgr**](https://cran.r-project.org/package=lgr),
+  both of which are relative newcomers.
+
+Each logging package features slightly different capabilities, but these
+benchmarks are focused on the two situations common to using all of them:
+
+1. Logging simple messages to the console; and
+2. Deciding not to log a message because it is below the threshold.
+
+The first of these is likely the most common kind of logging done by end users,
+although some may chose to log to files, over HTTP, or to the [system log](https://cran.r-project.org/package=rsyslog)
+(among others). Yet a benchmark of these other scenarios would largely show
+the relative expense of these operations, instead of the overhead of the
+logic performed by the logging packages themselves.
+
+The second measures the performance impact of leaving logging messages in
+running code, even if they are below the current threshold of visibility. This
+is another measure of overhead for each logging package.
+
+## Using `cat()`
+
+As a reference point, we can measure how long it takes R itself to write a
+simple message to the console:
+
+```{r cat-setup}
+cat_debug <- function() {
+  cat() # Print nothing.
+}
+
+cat_info <- function() cat(
+  "INFO  [", format(Sys.time(), "%Y-%m-%d %H:%M:%S", usetz = FALSE),
+  "] Info message.", sep = ""
+)
+```
+
+## The **log4r** Package
+
+The following is a typical **log4r** setup:
+
+```{r log4r-setup, results = "hide"}
+log4r_logger <- log4r::logger(threshold = "INFO")
+
+log4r_info <- function() {
+  log4r::info(log4r_logger, "Info message.")
+}
+
+log4r_debug <- function() {
+  log4r::debug(log4r_logger, "Debug message.")
+}
+```
+
+## The **futile.logger** Package
+
+The following is a typical **futile.logger** setup:
+
+```{r fl-setup, results = "hide"}
+requireNamespace("futile.logger")
+
+futile.logger::flog.logger()
+
+fl_info <- function() {
+  futile.logger::flog.info("Info message.")
+}
+
+fl_debug <- function() {
+  futile.logger::flog.debug("Debug message.")
+}
+```
+
+## The **logging** Package
+
+The following is what I believe to be a typical **logging** setup:
+
+```{r logging-setup, results = "hide"}
+requireNamespace("logging")
+
+logging::basicConfig()
+
+logging_info <- function() {
+  logging::loginfo("Info message.")
+}
+
+logging_debug <- function() {
+  logging::logdebug("Debug message.")
+}
+```
+
+## The **logger** Package
+
+The following is what I believe to be a typical **logger** setup:
+
+```{r logger-setup, results = "hide"}
+requireNamespace("logger")
+
+logger_info <- function() {
+  logger::log_info("Info message.")
+}
+
+logger_debug <- function() {
+  logger::log_debug("Debug message.")
+}
+```
+
+## The **lgr** Package
+
+The following is what I believe to be a typical **lgr** setup:
+
+```{r lgr-setup, results = "hide"}
+requireNamespace("lgr")
+
+lgr_logger <- lgr::get_logger("perf-test")
+lgr_logger$set_appenders(list(cons = lgr::AppenderConsole$new()))
+lgr_logger$set_propagate(FALSE)
+
+lgr_info <- function() {
+  lgr_logger$info("Info message.")
+}
+
+lgr_debug <- function() {
+  lgr_logger$debug("Debug message.")
+}
+```
+
+## Test All Loggers
+
+Debug messages should print nothing.
+
+```{r test-loggers-debug}
+log4r_debug()
+cat_debug()
+logging_debug()
+fl_debug()
+logger_debug()
+lgr_debug()
+```
+
+Info messages should print to the console. Small differences in output format
+are to be expected.
+
+```{r test-loggers, collapse=TRUE}
+log4r_info()
+cat_info()
+logging_info()
+fl_info()
+logger_info()
+lgr_info()
+```
+
+## Benchmarks
+
+The following benchmarks all loggers defined above:
+
+```{r benchmark, results = "hide", echo = TRUE}
+info_bench <- microbenchmark::microbenchmark(
+  cat = cat_info(),
+  log4r = log4r_info(),
+  futile.logger = fl_info(),
+  logging = logging_info(),
+  logger = logger_info(),
+  lgr = lgr_info(),
+  times = 500,
+  control = list(warmups = 50)
+)
+
+debug_bench <- microbenchmark::microbenchmark(
+  cat = cat_debug(),
+  log4r = log4r_debug(),
+  futile.logger = fl_debug(),
+  logging = logging_debug(),
+  logger = logger_debug(),
+  lgr = lgr_debug(),
+  times = 500,
+  control = list(warmups = 50)
+)
+```
+
+### How long does it take to print messages?
+
+```{r print-benchmark-1}
+print(info_bench, order = "median")
+```
+
+### How long does it take to decide to do nothing?
+
+```{r print-benchmark-2}
+print(debug_bench, order = "median")
+```
