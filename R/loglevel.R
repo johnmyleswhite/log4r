@@ -15,7 +15,7 @@ LEVELS <- factor(LEVEL_NAMES, levels = LEVEL_NAMES, ordered = TRUE)
 #'
 #' @param i An integer from the set 1..5.  Otherwise it will be modified
 #'   sensibly to fit in that range.  Alternatively, a named logging level
-#'   (one of \Sexpr{paste0('"', log4r:::LEVEL_NAMES, '"', collapse = ", ")}).
+#'   (one of "DEBUG", "INFO", "WARN", "ERROR", or "FATAL").
 #' @param x An object of class "loglevel"
 #' @param ... Unused
 #' @param v A verbosity level from the set 5..1. For historical reasons, they

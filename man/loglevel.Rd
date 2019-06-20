@@ -30,7 +30,7 @@ verbosity(v)
 \arguments{
 \item{i}{An integer from the set 1..5.  Otherwise it will be modified
 sensibly to fit in that range.  Alternatively, a named logging level
-(one of \Sexpr{paste0('"', log4r:::LEVEL_NAMES, '"', collapse = ", ")}).}
+(one of "DEBUG", "INFO", "WARN", "ERROR", or "FATAL").}
 
 \item{x}{An object of class "loglevel"}
 
