@@ -34,9 +34,9 @@ default_log_layout <- function(time_format = "%Y-%m-%d %H:%M:%S") {
   stopifnot(is.character(time_format))
 
   # Check that the time format works.
-  if (inherits(fmt_current_time(time_format), "try-error")) {
-    stop("Invalid strptime format string. See ?strptime.")
-  }
+  tryCatch(fmt_current_time(time_format), error = function(e) {
+    stop("Invalid strptime format string. See ?strptime.", call. = FALSE)
+  })
 
   function(level, ...) {
     msg <- paste0(..., collapse = "")
