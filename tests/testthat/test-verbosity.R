@@ -1,17 +1,13 @@
-library('testthat')
+context("verbosity")
 
-library('log4r')
-
-context('Verbosity')
-
-test_that('Verbosity constructor', {
-  expect_that(verbosity(-19), equals(log4r:::FATAL))
-  expect_that(verbosity(-1), equals(log4r:::FATAL))
-  expect_that(verbosity(1), equals(log4r:::FATAL))
-  expect_that(verbosity(2), equals(log4r:::ERROR))
-  expect_that(verbosity(3), equals(log4r:::WARN))
-  expect_that(verbosity(4), equals(log4r:::INFO))
-  expect_that(verbosity(5), equals(log4r:::DEBUG))
-  expect_that(verbosity(6), equals(log4r:::DEBUG))
-  expect_that(verbosity(60), equals(log4r:::DEBUG))
+test_that("The verbosity() constructor creates equivalent log levels", {
+  expect_equal(verbosity(-19), FATAL)
+  expect_equal(verbosity(-1), FATAL)
+  expect_equal(verbosity(1), FATAL)
+  expect_equal(verbosity(2), ERROR)
+  expect_equal(verbosity(3), WARN)
+  expect_equal(verbosity(4), INFO)
+  expect_equal(verbosity(5), DEBUG)
+  expect_equal(verbosity(6), DEBUG)
+  expect_equal(verbosity(60), DEBUG)
 })

@@ -1,15 +1,11 @@
-library('testthat')
-
-library('log4r')
-
-context('Acceptance')
+context("acceptance")
 
 test_that('Creation', {
   logger <- create.logger()
-  expect_that(logger, is_a('logger'))
+  expect_s3_class(logger, "logger")
 
   logfile(logger) <- file.path('base.log')
-  expect_that(logfile(logger), equals(file.path('base.log')))
+  expect_equal(logfile(logger), file.path('base.log'))
 })
 
 test_that('Logger levels', {
@@ -40,27 +36,27 @@ test_that('Creation of log file on first log entry', {
   level(logger) <- log4r:::DEBUG
 
   debug(logger, 'A Debugging Message')
-  expect_that(file.exists(logfile(logger)), is_true())
+  expect_true(file.exists(logfile(logger)))
 
   unlink(logfile(logger))
 
   info(logger, 'An Info Message')
-  expect_that(file.exists(logfile(logger)), is_true())
+  expect_true(file.exists(logfile(logger)))
 
   unlink(logfile(logger))
 
   warn(logger, 'A Warning Message')
-  expect_that(file.exists(logfile(logger)), is_true())
+  expect_true(file.exists(logfile(logger)))
 
   unlink(logfile(logger))
 
   error(logger, 'An Error Message')
-  expect_that(file.exists(logfile(logger)), is_true())
+  expect_true(file.exists(logfile(logger)))
 
   unlink(logfile(logger))
 
   fatal(logger, 'A Fatal Error Message')
-  expect_that(file.exists(logfile(logger)), is_true())
+  expect_true(file.exists(logfile(logger)))
 
   unlink(logfile(logger))
 })
@@ -71,22 +67,22 @@ test_that('No creation of log file with insufficient level', {
 
   level(logger) <- "INFO"
   debug(logger, 'A Debugging Message')
-  expect_that(file.exists(logfile(logger)), is_false())
+  expect_false(file.exists(logfile(logger)))
 
   level(logger) <- "WARN"
   info(logger, 'An Info Message')
-  expect_that(file.exists(logfile(logger)), is_false())
+  expect_false(file.exists(logfile(logger)))
 
   level(logger) <- "ERROR"
   warn(logger, 'A Warning Message')
-  expect_that(file.exists(logfile(logger)), is_false())
+  expect_false(file.exists(logfile(logger)))
 
   level(logger) <- "FATAL"
   error(logger, 'An Error Message')
-  expect_that(file.exists(logfile(logger)), is_false())
+  expect_false(file.exists(logfile(logger)))
 
   fatal(logger, 'A Fatal Error Message')
-  expect_that(file.exists(logfile(logger)), is_true())
+  expect_true(file.exists(logfile(logger)))
 
   unlink(logfile(logger))
 })
