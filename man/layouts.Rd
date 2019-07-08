@@ -5,6 +5,7 @@
 \alias{default_log_layout}
 \alias{simple_log_layout}
 \alias{bare_log_layout}
+\alias{json_log_layout}
 \title{Layouts}
 \usage{
 default_log_layout(time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
@@ -12,10 +13,14 @@ default_log_layout(time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
 simple_log_layout()
 
 bare_log_layout()
+
+json_log_layout(pretty = FALSE, time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
 }
 \arguments{
 \item{time_format}{A valid format string for timestamps. See
 \code{\link[base]{strptime}}.}
+
+\item{pretty}{When \code{TRUE}, format JSON with whitespace and indentation.}
 }
 \description{
 In \href{https://logging.apache.org/log4j/}{log4j} etymology,
@@ -29,6 +34,8 @@ For implementing your own layouts, see Details.
 \details{
 Layouts are implemented as functions with the interface
 \code{function(level, ...)} and returning a single string.
+
+\code{json_log_layout} requires the \code{jsonlite} package.
 }
 \examples{
 # The behaviour of a layout can be seen by using them directly:

@@ -19,6 +19,7 @@ BugReports: https://github.com/johnmyleswhite/log4r/issues
 Suggests:
     futile.logger,
     httr,
+    jsonlite,
     knitr,
     lgr,
     logger,
