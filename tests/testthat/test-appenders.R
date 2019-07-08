@@ -16,6 +16,7 @@ test_that("The file appender works correctly", {
 test_that("Layout arguments are checked", {
   expect_error(console_appender("notalayout"))
   expect_error(file_appender(tempfile("log"), layout = "notalayout"))
+  expect_error(tcp_appender(layout = "notalayout"))
 })
 
 test_that("Lazy evaluation does not lead to surprising results", {

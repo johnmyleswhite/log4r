@@ -43,3 +43,6 @@ appender <- console_appender()
 appender("INFO", "Input has length ", 0, ".")
 
 }
+\seealso{
+\code{\link{tcp_appender}}
+}

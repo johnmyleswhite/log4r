@@ -28,6 +28,9 @@
 #' appender <- console_appender()
 #' appender("INFO", "Input has length ", 0, ".")
 #'
+#' @seealso \code{\link{tcp_appender}}
+#'
+#'
 #' @name appenders
 #' @rdname appenders
 #' @aliases console_appender
@@ -51,5 +54,34 @@ file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
   function(level, ...) {
     msg <- layout(level, ...)
     cat(msg, file = file, sep = "", append = append)
+  }
+}
+
+#' Log Messages via TCP
+#'
+#' Append messages to arbitrary TCP destinations.
+#'
+#' @param host Hostname for the socket connection.
+#' @param port Port number for the socket connection.
+#' @param layout A layout function taking a \code{level} parameter and
+#'   additional arguments corresponding to the message.
+#' @param timeout Timeout for the connection.
+#'
+#' @seealso \code{\link{appenders}} for more information on Appenders, and
+#'   \code{\link[base]{socketConnection}} for the underlying connection object
+#'   used by \code{tcp_appender}.
+#'
+#' @export
+tcp_appender <- function(host, port, layout = default_log_layout(),
+                         timeout = getOption("timeout")) {
+  stopifnot(is.function(layout))
+  layout <- compiler::cmpfun(layout)
+  # TODO: Determine how/if we should close this connection.
+  con <- socketConnection(
+    host = host, port = port, open = "wb", blocking = TRUE, timeout = timeout
+  )
+  function(level, ...) {
+    msg <- layout(level, ...)
+    writeBin(msg, con = con)
   }
 }
