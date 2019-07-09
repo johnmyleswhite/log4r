@@ -44,5 +44,6 @@ appender("INFO", "Input has length ", 0, ".")
 
 }
 \seealso{
-\code{\link{tcp_appender}}, \code{\link{http_appender}}
+\code{\link{tcp_appender}}, \code{\link{http_appender}},
+  \code{\link{syslog_appender}}
 }

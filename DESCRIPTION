@@ -25,6 +25,7 @@ Suggests:
     logging,
     microbenchmark,
     rmarkdown,
+    rsyslog,
     testthat
 Encoding: UTF-8
 LazyLoad: yes
