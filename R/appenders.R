@@ -28,7 +28,7 @@
 #' appender <- console_appender()
 #' appender("INFO", "Input has length ", 0, ".")
 #'
-#' @seealso \code{\link{tcp_appender}}
+#' @seealso \code{\link{tcp_appender}}, \code{\link{http_appender}}
 #'
 #'
 #' @name appenders
@@ -85,5 +85,62 @@ tcp_appender <- function(host, port, layout = default_log_layout(),
   function(level, ...) {
     msg <- layout(level, ...)
     writeBin(msg, con = env$con)
+  }
+}
+
+#' Log Messages via HTTP
+#'
+#' @description
+#'
+#' Send messages in the body of HTTP requests. Responses with status code 400
+#' or above will trigger errors.
+#'
+#' Requires the \code{httr} package.
+#'
+#' @param url The URL to submit messages to.
+#' @param method The HTTP method to use, usually \code{"POST"} or \code{"GET"}.
+#' @param layout A layout function taking a \code{level} parameter and
+#'   additional arguments corresponding to the message.
+#' @param ... Further arguments passed on to \code{\link[httr]{POST}}.
+#'
+#' @examples
+#' \dontrun{
+#' # POST messages to localhost.
+#' appender <- http_appender("localhost")
+#' appender("INFO", "Message.")
+#'
+#' # POST JSON-encoded messages.
+#' appender <- http_appender(
+#'   "localhost", method = "POST", layout = default_log_layout(),
+#'   httr::content_type_json()
+#' )
+#' appender("INFO", "Message.")
+#' }
+#'
+#' @seealso \code{\link{appenders}} for more information on Appenders.
+#'
+#' @export
+http_appender <- function(url, method = "POST", layout = default_log_layout(),
+                          ...) {
+  if (!requireNamespace("httr", quietly = TRUE)) {
+    stop("The 'httr' package is required to use this HTTP appender.")
+  }
+  stopifnot(is.function(layout))
+  layout <- compiler::cmpfun(layout)
+
+  tryCatch({
+    verb <- get(method, envir = asNamespace("httr"))
+  }, error = function(e) {
+    stop("'", method, "' is not a supported HTTP method.", call. = FALSE)
+  })
+  args <- c(list(url = url), list(...))
+  function(level, ...) {
+    args$body <- layout(level, ...)
+    resp <- do.call(verb, args)
+
+    # Treat HTTP errors as actual errors.
+    if (httr::status_code(resp) >= 400) {
+      stop("Server responded with error ", httr::status_code(resp), ".")
+    }
   }
 }
