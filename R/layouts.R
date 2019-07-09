@@ -54,6 +54,16 @@ simple_log_layout <- function() {
   }
 }
 
+#' @rdname layouts
+#' @aliases bare_log_layout
+#' @export
+bare_log_layout <- function() {
+  function(level, ...) {
+    msg <- paste0(..., collapse = "")
+    sprintf("%s\n", msg)
+  }
+}
+
 # Fast C wrapper of strftime() and localtime(). Use with caution.
 fmt_current_time <- function(format) {
   .Call(R_fmt_current_time, format)

@@ -6,6 +6,9 @@ test_that("Basic layouts work correctly", {
 
   layout <- default_log_layout()
   expect_match(layout("INFO", "Message"), "Message")
+
+  layout <- bare_log_layout()
+  expect_match(layout("INFO", "Message"), "Message")
 })
 
 test_that("Wonky times formats are caught early", {
