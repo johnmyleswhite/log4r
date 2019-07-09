@@ -102,6 +102,57 @@ json_log_layout <- function() {
   }
 }
 
+#' Layout Messages According to the Graylog Extended Log Format (GELF)
+#'
+#' @description
+#'
+#' GELF is a JSON-based log format designed to overcome some of the limitations
+#' of Syslog. Originally created for use in the open-source Graylog project, it
+#' is now supported by many open and proprietary logging systems.
+#'
+#' GELF-formatted logs can be delivered over TCP or HTTP.
+#'
+#' Note that JSON encoding is currently expensive, on the order of 0.25 ms, and
+#' requires the \code{jsonlite} package.
+#'
+#' @param host A string identifying the application.
+#'
+#' @seealso \href{The GELF Specification}{http://docs.graylog.org/en/3.0/pages/gelf.html}.
+#' @export
+gelf_log_layout <- function(host) {
+  if (!requireNamespace("jsonlite", quietly = TRUE)) {
+    stop("The 'jsonlite' package is required to use this GELF layout.")
+  }
+  stopifnot(is.character(host))
+
+  default_fields <- list(version = "1.1", host = host)
+
+  function(level, ...) {
+    fields <- list(...)
+    if (is.null(names(fields))) {
+      fields <- list(short_message = paste0(fields, collapse = ""))
+    } else {
+      ok <- startsWith(names(fields), "_")
+      names(fields)[!ok] <- paste0("_", names(fields)[!ok])
+      # Silently drop fields GELF can't handle.
+      valid <- vapply(
+        fields, function(f) length(f) == 1 && is.numeric(f) || is.character(f),
+        logical(1)
+      )
+      fields <- fields[valid]
+      fields$short_message <- ""
+    }
+    fields$timestamp <- unclass(Sys.time())
+    # Translate between log4j and GELF priority levels.
+    fields$level <- switch(
+      level, "TRACE" = 7L, "DEBUG" = 7L, "INFO" = 6L, "WARN" = 4L,
+      "ERROR" = 3L, "FATAL" = 2L
+    )
+    json <- jsonlite::toJSON(c(default_fields, fields), auto_unbox = TRUE)
+    unclass(json)
+  }
+}
+
 # Fast C wrapper of strftime() and localtime(). Use with caution.
 fmt_current_time <- function(format, use_utc = FALSE) {
   .Call(R_fmt_current_time, format, use_utc)

@@ -50,6 +50,13 @@ test_that("JSON layouts work correctly", {
   layout <- json_log_layout()
   expect_match(layout("INFO", "Message"), "\"message\":\"Message\"")
   expect_match(layout("INFO", field = "value"), "\"field\":\"value\"")
+
+  layout <- gelf_log_layout("myapp")
+  expect_match(layout("INFO", "Message"), "\"short_message\":\"Message\"")
+  expect_match(layout("INFO", field = "value"), "\"_field\":\"value\"")
+  # Invalid fields are dropped.
+  expect_false(grepl("\"_field\"", layout("INFO", field = complex(1))))
+  expect_false(grepl("\"_field\"", layout("INFO", field = numeric(2))))
 })
 
 test_that("Wonky times formats are caught early", {
