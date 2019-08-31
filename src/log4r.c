@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <Rinternals.h>
+#include <R_ext/Rdynload.h> // Included by default in R (>= 3.4).
 
 SEXP R_fmt_current_time(SEXP fmt)
 {
