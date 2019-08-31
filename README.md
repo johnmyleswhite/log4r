@@ -1,10 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file. -->
-log4r [![Travis-CI Build Status](https://travis-ci.org/johnmyleswhite/log4r.png?branch=master)](https://travis-ci.org/johnmyleswhite/log4r) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johnmyleswhite/log4r?branch=master)](https://ci.appveyor.com/project/johnmyleswhite/log4r)
-===================================================================================================================================================================================================================================================================================================================
-
-Introduction
-------------
+log4r
+=====
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/log4r)](https://cran.r-project.org/package=log4r)
+[![Travis-CI Build Status](https://travis-ci.org/johnmyleswhite/log4r.svg?branch=master)](https://travis-ci.org/johnmyleswhite/log4r)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johnmyleswhite/log4r?branch=master)](https://ci.appveyor.com/project/johnmyleswhite/log4r)
+<!-- badges: end -->
 
 The log4r package is meant to provide a clean, lightweight object-oriented approach to logging in R based roughly on the widely-emulated log4j API.
 
