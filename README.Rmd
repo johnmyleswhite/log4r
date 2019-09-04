@@ -23,21 +23,28 @@ library(log4r)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/johnmyleswhite/log4r?branch=master)](https://ci.appveyor.com/project/johnmyleswhite/log4r)
 <!-- badges: end -->
 
-The log4r package is meant to provide a clean, lightweight object-oriented
-approach to logging in R based roughly on the widely-emulated log4j API.
+**log4r** is a fast, lightweight, object-oriented approach to logging in R based
+on the widely-emulated [Apache Log4j](https://logging.apache.org/log4j/) project.
+
+**log4r** differs from other R logging packages in its focus on performance and
+simplicity. As such, it has fewer features -- although it is still quite
+extensible, as seen below -- but is much faster. See
+`vignette("performance", package = "log4r")` for details.
 
 ## Installation
 
-- Stable CRAN version:
+The package is available from CRAN:
 
 ```r
 install.packages("log4r")
 ```
 
-- Development version on GitHub:
+If you want to use the development version, you can install the package from
+GitHub as follows:
 
 ```r
-devtools::install_github("johnmyleswhite/log4r")
+# install.packages("remotes")
+remotes::install_github("johnmyleswhite/log4r")
 ```
 
 ## Usage
@@ -104,25 +111,6 @@ readLines(log_file)
 unlink(log_file)
 ```
 
-## The log4r Priority Levels
+## License
 
-`log4r` supports five priority levels. In order from lowest to highest
-priority, they are:
-
-* `"DEBUG"`
-* `"INFO"`
-* `"WARN"`
-* `"ERROR"`
-* `"FATAL"`
-
-## Keep in Mind
-
-* Use a log file in a non-existent directory will fail. In general, no effort
-  is made to create directories.
-
-* Only messages at or above the current threshold are logged. Messages below
-  this level are simply ignored.
-
-* Using the internal priority level constants using the `:::` notation is
-  deprecated, but no warning is given.  It is safer to simply use strings
-  or numeric constants.
+The package is available under the terms of the Artistic License 2.0.
