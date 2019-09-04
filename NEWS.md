@@ -1,3 +1,10 @@
+# log4r 0.3.1 (2019-09-04)
+
+* There is now a vignette on logger performance.
+* Fixes a missing header file on older versions of R (<= 3.4). (#12)
+* Fixes an issue where `default_log_layout()` would not validate format strings
+  correctly.
+
 # log4r 0.3.0 (2019-06-20)
 
 * A new system for configuring logging, via "Appenders" and "Layouts". See
