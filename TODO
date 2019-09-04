@@ -1,8 +1,0 @@
-- Put this snippet of code somewhere?
-		write.message(logger, '============ New Logging Session Opened ============')
-- Use gettextf() to implement a formatting system.
-- Find source of following unreproducible error:
-		Error in logger[["level"]] : subscript out of bounds
-- Fix the following error:
-		* checking for unstated dependencies in examples ... NOTE
-		'library' or 'require' call not declared from: optparse
