@@ -4,8 +4,6 @@
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^Makefile$
-^NEWS[.]md$
-^README[.]markdown$
 ^cran-comments.md$
 ^[.]gitignore$
 ^[.]Rhistory$
