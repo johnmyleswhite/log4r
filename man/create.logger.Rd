@@ -4,8 +4,7 @@
 \alias{create.logger}
 \title{Creates a logger object.}
 \usage{
-create.logger(logfile = "logfile.log", level = "FATAL",
-  logformat = NULL)
+create.logger(logfile = "logfile.log", level = "FATAL", logformat = NULL)
 }
 \arguments{
 \item{logfile}{The full pathname of the file you want log messages to be
