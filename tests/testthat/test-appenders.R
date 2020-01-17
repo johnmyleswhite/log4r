@@ -17,3 +17,16 @@ test_that("Layout arguments are checked", {
   expect_error(console_appender("notalayout"))
   expect_error(file_appender(tempfile("log"), layout = "notalayout"))
 })
+
+test_that("Lazy evaluation does not lead to surprising results", {
+  x <- "foo.txt"
+  y <- TRUE
+  appender <- file_appender(file = x, append = y)
+  x <- "bar.txt"
+  y <- FALSE
+
+  # Check that mutating the parent environment does not modify them in the
+  # frame in which the appender evaluates.
+  expect_equal(environment(appender)$file, "foo.txt")
+  expect_equal(environment(appender)$append, TRUE)
+})

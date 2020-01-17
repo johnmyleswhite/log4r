@@ -46,6 +46,8 @@ console_appender <- function(layout = default_log_layout()) {
 file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
   stopifnot(is.function(layout))
   layout <- compiler::cmpfun(layout)
+  force(file)
+  force(append)
   function(level, ...) {
     msg <- layout(level, ...)
     cat(msg, file = file, sep = "", append = append)
