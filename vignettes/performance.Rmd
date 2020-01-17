@@ -1,5 +1,6 @@
 ---
 title: "Logging Performance"
+date: "Updated as of `r as.Date(Sys.time())`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{performance}
