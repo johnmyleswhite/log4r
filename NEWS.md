@@ -1,3 +1,8 @@
+# log4r 0.3.2 (2020-01-17)
+
+* Fixes an issue where appender functions did not evaluate all their arguments,
+  leading to surprising behaviour in e.g. loops. Reported by Nicola Farina.
+
 # log4r 0.3.1 (2019-09-04)
 
 * There is now a vignette on logger performance.
