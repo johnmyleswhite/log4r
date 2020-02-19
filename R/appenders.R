@@ -76,12 +76,14 @@ tcp_appender <- function(host, port, layout = default_log_layout(),
                          timeout = getOption("timeout")) {
   stopifnot(is.function(layout))
   layout <- compiler::cmpfun(layout)
-  # TODO: Determine how/if we should close this connection.
-  con <- socketConnection(
+  # Use a finalizer pattern to make sure we close the connection.
+  env <- new.env(size = 1)
+  env$con <- socketConnection(
     host = host, port = port, open = "wb", blocking = TRUE, timeout = timeout
   )
+  reg.finalizer(env, function(e) close(e$con), onexit = TRUE)
   function(level, ...) {
     msg <- layout(level, ...)
-    writeBin(msg, con = con)
+    writeBin(msg, con = env$con)
   }
 }
