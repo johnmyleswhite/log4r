@@ -29,5 +29,6 @@ Suggests:
     testthat
 Encoding: UTF-8
 LazyLoad: yes
-RoxygenNote: 7.0.0
+Roxygen: list(old_usage = TRUE)
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr
