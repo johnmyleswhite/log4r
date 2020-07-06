@@ -3,12 +3,24 @@ context("layouts")
 test_that("Basic layouts work correctly", {
   layout <- simple_log_layout()
   expect_match(layout("INFO", "Message"), "Message")
+  expect_match(
+    layout("INFO", "Message ", "in a", " bottle."),
+    "Message in a bottle."
+  )
 
   layout <- default_log_layout()
   expect_match(layout("INFO", "Message"), "Message")
+  expect_match(
+    layout("INFO", "Message ", "in a", " bottle."),
+    "Message in a bottle."
+  )
 
   layout <- bare_log_layout()
   expect_match(layout("INFO", "Message"), "Message")
+  expect_match(
+    layout("INFO", "Message ", "in a", " bottle."),
+    "Message in a bottle."
+  )
 })
 
 test_that("Wonky times formats are caught early", {
