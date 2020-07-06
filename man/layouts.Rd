@@ -18,7 +18,8 @@ json_log_layout(pretty = FALSE, time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
 }
 \arguments{
 \item{time_format}{A valid format string for timestamps. See
-\code{\link[base]{strptime}}.}
+\code{\link[base]{strptime}}. For some layouts this can be \code{NA} to
+elide the timestamp.}
 
 \item{pretty}{When \code{TRUE}, format JSON with whitespace and indentation.}
 }
