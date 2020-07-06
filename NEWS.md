@@ -1,3 +1,11 @@
+# log4r 0.3.2.9000
+
+* New built-in appenders for writing to the Unix system log, via HTTP, and to
+  TCP connections, plus a vignette on using them: "Logging Beyond Local Files".
+
+* A new `bare_log_layout()` for when you don't want the level or timestamp
+  handled automatically. This is most useful for the `syslog_appender()`.
+
 # log4r 0.3.2 (2020-01-17)
 
 * Fixes an issue where appender functions did not evaluate all their arguments,
