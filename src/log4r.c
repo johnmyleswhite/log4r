@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <time.h>
+
+#define STRICT_R_HEADERS
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h> // Included by default in R (>= 3.4).
 
 SEXP R_fmt_current_time(SEXP fmt)
 {
-  const char *fmt_str = CHAR(asChar(fmt));
+  const char *fmt_str = CHAR(Rf_asChar(fmt));
 
   time_t timer;
   char buffer[26];
@@ -20,7 +22,7 @@ SEXP R_fmt_current_time(SEXP fmt)
     return R_NilValue;
   }
 
-  return ScalarString(mkCharLen(buffer, written));
+  return Rf_ScalarString(Rf_mkCharLen(buffer, written));
 }
 
 static const R_CallMethodDef log4r_entries[] = {
