@@ -21,8 +21,11 @@ general-purpose logging packages available on CRAN:
 - [**futile.logger**](https://cran.r-project.org/package=futile.logger) and
   [**logging**](https://cran.r-project.org/package=logging), which are
   well-established packages; and
-- [**logger**](https://cran.r-project.org/package=logger) and [**lgr**](https://cran.r-project.org/package=lgr),
-  both of which are relative newcomers.
+- [**logger**](https://cran.r-project.org/package=logger),
+  [**lgr**](https://cran.r-project.org/package=lgr),
+  [**loggit**](https://cran.r-project.org/package=loggit), and
+  [**rlog**](https://cran.r-project.org/package=rlog), all of which are
+  relative newcomers.
 
 Each logging package features slightly different capabilities, but these
 benchmarks are focused on the two situations common to using all of them:
@@ -144,6 +147,41 @@ lgr_debug <- function() {
 }
 ```
 
+## The **loggit** Package
+
+The following is what I believe to be a typical **loggit** setup. Since we only
+want to log to the console, set the output file to `/dev/null`. In addition,
+**loggit** does not have a notion of thresholds, so there is no "do nothing"
+operation to test.
+
+```{r loggit-setup, results = "hide"}
+requireNamespace("loggit")
+
+loggit::set_logfile("/dev/null")
+
+loggit_info <- function() {
+  loggit::loggit("INFO", "Info message.")
+}
+```
+
+## The **rlog** Package
+
+The **rlog** package currently has no configuration options other than the
+threshold, which is controlled via an environment variable and defaults to
+hiding debug-level messages:
+
+```{r rlog-setup, results = "hide"}
+requireNamespace("rlog")
+
+rlog_info <- function() {
+  rlog::log_info("Info message.")
+}
+
+rlog_debug <- function() {
+  rlog::log_debug("Debug message.")
+}
+```
+
 ## Test All Loggers
 
 Debug messages should print nothing.
@@ -155,6 +193,7 @@ logging_debug()
 fl_debug()
 logger_debug()
 lgr_debug()
+rlog_debug()
 ```
 
 Info messages should print to the console. Small differences in output format
@@ -167,6 +206,8 @@ logging_info()
 fl_info()
 logger_info()
 lgr_info()
+loggit_info()
+rlog_info()
 ```
 
 ## Benchmarks
@@ -181,6 +222,8 @@ info_bench <- microbenchmark::microbenchmark(
   logging = logging_info(),
   logger = logger_info(),
   lgr = lgr_info(),
+  loggit = loggit_info(),
+  rlog = rlog_info(),
   times = 500,
   control = list(warmups = 50)
 )
@@ -192,6 +235,7 @@ debug_bench <- microbenchmark::microbenchmark(
   logging = logging_debug(),
   logger = logger_debug(),
   lgr = lgr_debug(),
+  rlog = rlog_debug(),
   times = 500,
   control = list(warmups = 50)
 )
