@@ -51,10 +51,13 @@ file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
   stopifnot(is.function(layout))
   layout <- compiler::cmpfun(layout)
   force(file)
-  force(append)
+  if (!append) {
+    # This should truncate the file, if it exists.
+    file.create(file)
+  }
   function(level, ...) {
     msg <- layout(level, ...)
-    cat(msg, file = file, sep = "", append = append)
+    cat(msg, file = file, sep = "", append = TRUE)
   }
 }
 

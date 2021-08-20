@@ -6,6 +6,10 @@
 * A new `bare_log_layout()` for when you don't want the level or timestamp
   handled automatically. This is most useful for the `syslog_appender()`.
 
+* Log messages prior to the last entry are no longer lost when a file appender
+  is created with `append = FALSE`. Instead, the file is truncated only when the
+  appender is created, as intended. Fixes #17.
+
 # log4r 0.3.2 (2020-01-17)
 
 * Fixes an issue where appender functions did not evaluate all their arguments,
