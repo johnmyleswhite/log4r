@@ -30,5 +30,5 @@ Suggests:
 Encoding: UTF-8
 LazyLoad: yes
 Roxygen: list(old_usage = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
