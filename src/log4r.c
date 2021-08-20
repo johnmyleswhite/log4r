@@ -26,8 +26,11 @@ SEXP R_fmt_current_time(SEXP fmt, SEXP utc)
   return Rf_ScalarString(Rf_mkCharLen(buffer, written));
 }
 
+SEXP R_encode_logfmt(SEXP list); /* See logfmt.c. */
+
 static const R_CallMethodDef log4r_entries[] = {
   {"R_fmt_current_time", (DL_FUNC) &R_fmt_current_time, 2},
+  {"R_encode_logfmt", (DL_FUNC) &R_encode_logfmt, 1},
   {NULL, NULL, 0}
 };
 

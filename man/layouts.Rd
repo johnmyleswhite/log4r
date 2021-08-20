@@ -5,6 +5,7 @@
 \alias{default_log_layout}
 \alias{simple_log_layout}
 \alias{bare_log_layout}
+\alias{logfmt_log_layout}
 \alias{json_log_layout}
 \title{Layouts}
 \usage{
@@ -13,6 +14,8 @@ default_log_layout(time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
 simple_log_layout()
 
 bare_log_layout()
+
+logfmt_log_layout()
 
 json_log_layout()
 }

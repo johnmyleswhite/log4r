@@ -61,6 +61,25 @@ bare_log_layout <- function() {
   }
 }
 
+#' @rdname layouts
+#' @aliases logfmt_log_layout
+#' @export
+logfmt_log_layout <- function() {
+  time_format <- "%Y-%m-%dT%H:%M:%SZ"
+
+  function(level, ...) {
+    fields <- list(...)
+    if (is.null(names(fields))) {
+      fields <- list(msg = paste0(fields, collapse = ""))
+    }
+    extra <- list(level = level)
+    if (!is.na(time_format)) {
+      extra$ts <- fmt_current_time(time_format, TRUE)
+    }
+    encode_logfmt(c(extra, fields))
+  }
+}
+
 #' @details \code{json_log_layout} requires the \code{jsonlite} package.
 #'
 #' @rdname layouts
@@ -92,4 +111,8 @@ verify_time_format <- function(time_format) {
   tryCatch(fmt_current_time(time_format), error = function(e) {
     stop("Invalid strptime format string. See ?strptime.", call. = FALSE)
   })
+}
+
+encode_logfmt <- function(fields) {
+  .Call(R_encode_logfmt, fields, PACKAGE = "log4r")
 }
