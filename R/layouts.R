@@ -63,20 +63,14 @@ bare_log_layout <- function() {
 
 #' @details \code{json_log_layout} requires the \code{jsonlite} package.
 #'
-#' @param pretty When \code{TRUE}, format JSON with whitespace and indentation.
-#'
 #' @rdname layouts
 #' @aliases json_log_layout
 #' @export
-json_log_layout <- function(pretty = FALSE, time_format = "%Y-%m-%d %H:%M:%S") {
+json_log_layout <- function() {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("The 'jsonlite' package is required to use this JSON layout.")
   }
-  stopifnot(is.logical(pretty))
-  if (!is.na(time_format)) {
-    stopifnot(is.character(time_format))
-    verify_time_format(time_format)
-  }
+  time_format <- "%Y-%m-%dT%H:%M:%SZ"
 
   function(level, ...) {
     fields <- list(...)
@@ -84,14 +78,14 @@ json_log_layout <- function(pretty = FALSE, time_format = "%Y-%m-%d %H:%M:%S") {
       fields <- list(message = paste0(fields, collapse = ""))
     }
     fields$level <- as.character(level)
-    fields$time <- if (!is.na(time_format)) fmt_current_time(time_format)
-    jsonlite::toJSON(fields, pretty = pretty, auto_unbox = TRUE)
+    fields$time <- fmt_current_time(time_format, TRUE)
+    jsonlite::toJSON(fields, auto_unbox = TRUE)
   }
 }
 
 # Fast C wrapper of strftime() and localtime(). Use with caution.
-fmt_current_time <- function(format) {
-  .Call(R_fmt_current_time, format)
+fmt_current_time <- function(format, use_utc = FALSE) {
+  .Call(R_fmt_current_time, format, use_utc)
 }
 
 verify_time_format <- function(time_format) {

@@ -14,14 +14,12 @@ simple_log_layout()
 
 bare_log_layout()
 
-json_log_layout(pretty = FALSE, time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
+json_log_layout()
 }
 \arguments{
 \item{time_format}{A valid format string for timestamps. See
 \code{\link[base]{strptime}}. For some layouts this can be \code{NA} to
 elide the timestamp.}
-
-\item{pretty}{When \code{TRUE}, format JSON with whitespace and indentation.}
 }
 \description{
 In \href{https://logging.apache.org/log4j/}{log4j} etymology,
