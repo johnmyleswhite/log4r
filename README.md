@@ -7,10 +7,6 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/log4r)](https://cran.r-project.org/package=log4r)
-[![Travis-CI Build
-Status](https://travis-ci.org/johnmyleswhite/log4r.svg?branch=master)](https://travis-ci.org/johnmyleswhite/log4r)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/johnmyleswhite/log4r?branch=master)](https://ci.appveyor.com/project/johnmyleswhite/log4r)
 [![R-CMD-check](https://github.com/johnmyleswhite/log4r/workflows/R-CMD-check/badge.svg)](https://github.com/johnmyleswhite/log4r/actions)
 <!-- badges: end -->
 
