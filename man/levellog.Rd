@@ -9,17 +9,17 @@
 \alias{fatal}
 \title{Write messages to logs at a given priority level.}
 \usage{
-levellog(logger, level, message)
+levellog(logger, level, ...)
 
-debug(logger, message)
+debug(logger, ...)
 
-info(logger, message)
+info(logger, ...)
 
-warn(logger, message)
+warn(logger, ...)
 
-error(logger, message)
+error(logger, ...)
 
-fatal(logger, message)
+fatal(logger, ...)
 }
 \arguments{
 \item{logger}{An object of class 'logger'.}
@@ -27,7 +27,8 @@ fatal(logger, message)
 \item{level}{The desired priority level: a number, a character, or an object
 of class 'loglevel'.  Will be coerced using \code{\link{as.loglevel}}.}
 
-\item{message}{A string to be printed to the log with the corresponding priority level.}
+\item{...}{One or more items to be written to the log at the corresponding
+priority level.}
 }
 \description{
 Write messages to logs at a given priority level.

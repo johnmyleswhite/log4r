@@ -5,6 +5,8 @@
 \alias{default_log_layout}
 \alias{simple_log_layout}
 \alias{bare_log_layout}
+\alias{logfmt_log_layout}
+\alias{json_log_layout}
 \title{Layouts}
 \usage{
 default_log_layout(time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
@@ -12,10 +14,15 @@ default_log_layout(time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
 simple_log_layout()
 
 bare_log_layout()
+
+logfmt_log_layout()
+
+json_log_layout()
 }
 \arguments{
 \item{time_format}{A valid format string for timestamps. See
-\code{\link[base]{strptime}}.}
+\code{\link[base]{strptime}}. For some layouts this can be \code{NA} to
+elide the timestamp.}
 }
 \description{
 In \href{https://logging.apache.org/log4j/}{log4j} etymology,
@@ -29,6 +36,8 @@ For implementing your own layouts, see Details.
 \details{
 Layouts are implemented as functions with the interface
 \code{function(level, ...)} and returning a single string.
+
+\code{json_log_layout} requires the \code{jsonlite} package.
 }
 \examples{
 # The behaviour of a layout can be seen by using them directly:
