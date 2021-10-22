@@ -1,5 +1,10 @@
 # log4r 0.3.2.9000
 
+* Support for structured logging by passing additional named parameters to the
+  existing logging functions. This includes two new structured-logging layouts
+  for JSON and [logfmt](https://brandur.org/logfmt) and a vignette on using
+  them: "Structured Logging".
+
 * New built-in appenders for writing to the Unix system log, via HTTP, and to
   TCP connections, plus a vignette on using them: "Logging Beyond Local Files".
 

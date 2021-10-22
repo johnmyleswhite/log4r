@@ -19,6 +19,10 @@ performance and simplicity. As such, it has fewer features – although it
 is still quite extensible, as seen below – but is much faster. See
 `vignette("performance", package = "log4r")` for details.
 
+Unlike other R logging packages, **log4r** also has first-class support
+for structured logging. See
+`vignette("structured-logging", package = "log4r")` for details.
+
 ## Installation
 
 The package is available from CRAN:
@@ -88,6 +92,18 @@ my_layout <- function(level, ...) {
 logger <- logger(appenders = console_appender(my_layout))
 info(logger, "Messages should now look a little different.")
 #> 2019-09-04 16:31:04 [INFO] Messages should now look a little different.
+```
+
+With an appropriate layout, you can also use *structured logging*,
+enriching log messages with contextual fields:
+
+``` r
+logger <- logger(appenders = console_appender(logfmt_log_layout()))
+info(
+  logger, message = "processed entries", file = "catpics_01.csv",
+  entries = 4124, elapsed = 2.311
+)
+#> level=INFO ts=2021-10-22T20:19:21Z message="processed entries" file=catpics_01.csv entries=4124 elapsed=2.311
 ```
 
 ## Older APIs
