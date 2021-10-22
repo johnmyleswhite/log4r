@@ -46,7 +46,7 @@ your R talk to the local syslog.
 To use the `syslog_appender`, all you need is an identifier for your R app or
 script:
 
-```{r rsyslog}
+```{r rsyslog, eval=requireNamespace("rsyslog", quietly = TRUE)}
 logger <- logger(appenders = syslog_appender("my-R-script"))
 ```
 
