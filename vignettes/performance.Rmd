@@ -118,6 +118,9 @@ The following is what I believe to be a typical **logger** setup:
 ```{r logger-setup, results = "hide"}
 requireNamespace("logger")
 
+# Match the behaviour of other logging packages and write to the console.
+logger::log_appender(logger::appender_stdout)
+
 logger_info <- function() {
   logger::log_info("Info message.")
 }
