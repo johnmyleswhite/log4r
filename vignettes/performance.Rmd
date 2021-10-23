@@ -157,7 +157,11 @@ operation to test.
 ```{r loggit-setup, results = "hide"}
 requireNamespace("loggit")
 
-loggit::set_logfile("/dev/null")
+if (.Platform$OS.type == "unix") {
+  loggit::set_logfile("/dev/null")
+} else {
+  loggit::set_logfile("nul")
+}
 
 loggit_info <- function() {
   loggit::loggit("INFO", "Info message.")
