@@ -1,4 +1,4 @@
-# log4r 0.3.2.9000
+# log4r 0.4.0
 
 * Support for structured logging by passing additional named parameters to the
   existing logging functions. This includes two new structured-logging layouts
