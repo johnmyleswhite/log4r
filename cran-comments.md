@@ -1,13 +1,27 @@
 ## Release Summary
 
-This is a patch release, fixing one minor bug but making no API changes.
+This is a new release containing major new features, two new vignettes, and some
+bug fixes.
 
 ## Test Environments
 
-* local Ubuntu 18.04 install, R 3.6.1
-* Windows Server 2008 R2 SP1, R-devel (via r-hub)
-* Fedora Linux, R-devel, clang, gfortran (via r-hub)
+- winbuilder (r-devel)
+- R-hub debian-gcc-release (r-release)
+- R-hub ubuntu-gcc-release (r-release)
+- R-hub fedora-clang-devel (r-devel)
 
 ## R CMD check Results
 
-0 errors | 0 warnings | 0 notes
+On Windows only, two NOTEs appear:
+
+> * checking package dependencies ... NOTE
+> Package suggested but not available for checking: 'rsyslog'
+
+> * checking Rd cross-references ... NOTE
+> Package unavailable to check Rd xrefs: 'rsyslog'
+
+These are due to listing the rsyslog package in Suggests, which is not available
+for Windows (it is Unix-only). This is an optional dependency and does not
+affect Windows users.
+
+0 errors | 0 warning | 2 notes
