@@ -33,6 +33,8 @@ test_that("logfmt layouts work correctly", {
   # Test escaping of keys and values.
   expect_match(layout("INFO", spaces = "with spaces"), 'spaces="with spaces"')
   expect_match(layout("INFO", "with spaces" = "value"), 'withspaces=value')
+  # Test dropped keys.
+  expect_false(grepl('value', layout("INFO", a = "a", "value")))
   expect_false(grepl('value', layout("INFO", " " = "value")))
   # Test precision.
   expect_match(layout("INFO", a = 1.234567, b = NULL), 'a=1.235 b=null')

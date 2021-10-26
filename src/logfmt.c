@@ -82,7 +82,7 @@ SEXP R_encode_logfmt(SEXP list)
     str = CHAR(elt);
     elt_len = Rf_length(elt);
     /* Skip fields with zero-length names rather than produce invalid output. */
-    if (elt_len == 0) {
+    if (elt_len == 0 || elt == NA_STRING) {
       continue;
     }
     if (!empty_key) {

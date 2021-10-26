@@ -3,6 +3,10 @@
 * Fixes a crash when the `logfmt_log_layout()` is passed long fields that also
   need escaping.
 
+* `logfmt_log_layout()` now drops fields with missing names rather than writing
+  `NA`, which matches the existing handling of other empty/unrepresentable field
+  names.
+
 # log4r 0.4.0
 
 * Support for structured logging by passing additional named parameters to the
