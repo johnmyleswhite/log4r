@@ -1,3 +1,8 @@
+# log4r 0.4.0.9000
+
+* Fixes a crash when the `logfmt_log_layout()` is passed long fields that also
+  need escaping.
+
 # log4r 0.4.0
 
 * Support for structured logging by passing additional named parameters to the

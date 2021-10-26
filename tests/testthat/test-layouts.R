@@ -42,6 +42,10 @@ test_that("logfmt layouts work correctly", {
     layout("INFO", a = data.frame(a = 1:3), b = NULL),
     'a=<omitted> b=null'
   )
+  # Test long keys and values.
+  long <- paste(sample(c(letters, "="), 1019, TRUE), collapse = "")
+  expect_match(layout("INFO", key = long), 'key=')
+  expect_match(layout("INFO", long = "value"), '=value')
 })
 
 test_that("JSON layouts work correctly", {

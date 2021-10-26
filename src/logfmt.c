@@ -23,7 +23,7 @@ int logfmt_needs_escape(char ch)
   return ch == '"' || ch == '=' || ch == '\\' || ch <= 0x20;
 }
 
-void buf_push_escaped(char *dest, const char *src, size_t n)
+char* buf_push_escaped(char *dest, const char *src, size_t n)
 {
   char ch;
   buf_push(dest, '"');
@@ -60,6 +60,7 @@ void buf_push_escaped(char *dest, const char *src, size_t n)
     }
   }
   buf_push(dest, '"');
+  return dest;
 }
 
 SEXP R_encode_logfmt(SEXP list)
@@ -160,7 +161,7 @@ SEXP R_encode_logfmt(SEXP list)
          escaped before we can actually write it out. */
       for (j = 0; j < elt_len; j++) {
         if (logfmt_needs_escape(str[j])) {
-          buf_push_escaped(buffer, str, elt_len);
+          buffer = buf_push_escaped(buffer, str, elt_len);
           goto wrote_string;
         }
       }
