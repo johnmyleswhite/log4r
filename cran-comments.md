@@ -1,7 +1,6 @@
 ## Release Summary
 
-This is a new release containing major new features, two new vignettes, and some
-bug fixes.
+This is a bugfix release fixing a serious crash.
 
 ## Test Environments
 
@@ -11,6 +10,13 @@ bug fixes.
 - R-hub fedora-clang-devel (r-devel)
 
 ## R CMD check Results
+
+winbuilder has a NOTE due to the short release window. This is expected, but
+this release fixes a critical bug.
+
+> * checking CRAN incoming feasibility ... NOTE
+> Maintainer: ‘Aaron Jacobs ’
+> Days since last update: 1
 
 On Windows only, two NOTEs appear:
 
@@ -24,4 +30,4 @@ These are due to listing the rsyslog package in Suggests, which is not available
 for Windows (it is Unix-only). This is an optional dependency and does not
 affect Windows users.
 
-0 errors | 0 warning | 2 notes
+0 errors | 0 warning | 3 notes
