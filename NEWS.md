@@ -1,4 +1,4 @@
-# log4r 0.4.0.9000
+# log4r 0.4.1
 
 * Fixes a crash when the `logfmt_log_layout()` is passed long fields that also
   need escaping.
