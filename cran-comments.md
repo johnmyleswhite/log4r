@@ -16,7 +16,7 @@ this release fixes a critical bug.
 
 > * checking CRAN incoming feasibility ... NOTE
 > Maintainer: ‘Aaron Jacobs ’
-> Days since last update: 1
+> Days since last update: 6
 
 On Windows only, two NOTEs appear:
 
