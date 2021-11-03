@@ -1,3 +1,8 @@
+# log4r 0.4.1.9000
+
+* Fixes a crash where `logfmt_log_layout()` would not correctly handle memory
+  reallocation of the underlying buffer.
+
 # log4r 0.4.1
 
 * Fixes a crash when the `logfmt_log_layout()` is passed long fields that also

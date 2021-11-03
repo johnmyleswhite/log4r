@@ -9,13 +9,14 @@
 /* Hex code "lookup table". */
 static const char *hex = "0123456789abcdef";
 
-void buf_push_all(char *dest, const char *src, size_t n)
+char* buf_push_all(char *dest, const char *src, size_t n)
 {
   /* It's possible we could be more clever and use memcpy here somehow, but it
      would probably not be worth it. */
   for (size_t i = 0; i < n; i++) {
     buf_push(dest, src[i]);
   }
+  return dest;
 }
 
 int logfmt_needs_escape(char ch)
@@ -53,7 +54,7 @@ char* buf_push_escaped(char *dest, const char *src, size_t n)
       /* Encode embedded control characters in the same manner as JSON, by
          converting e.g. '\b' to \u0008. This uses the classic bitshift/and
          approach to convert a character to hex. */
-      buf_push_all(dest, "u00", 3);
+      dest = buf_push_all(dest, "u00", 3);
       buf_push(dest, hex[(ch >> 4) & 0x0F]);
       buf_push(dest, hex[ch & 0x0F]);
       break;
@@ -108,42 +109,42 @@ SEXP R_encode_logfmt(SEXP list)
     buf_push(buffer, '=');
     elt = VECTOR_ELT(list, i);
     if (Rf_length(elt) == 0) {
-      buf_push_all(buffer, "null", 4);
+      buffer = buf_push_all(buffer, "null", 4);
       continue;
     }
     switch(TYPEOF(elt)) {
     case LGLSXP: {
       int v = LOGICAL_ELT(elt, 0);
       if (v == NA_LOGICAL) {
-        buf_push_all(buffer, "null", 4);
+        buffer = buf_push_all(buffer, "null", 4);
       } else if (v) {
-        buf_push_all(buffer, "true", 4);
+        buffer = buf_push_all(buffer, "true", 4);
       } else {
-        buf_push_all(buffer, "false", 5);
+        buffer = buf_push_all(buffer, "false", 5);
       }
       break;
     }
     case INTSXP: {
       int v = INTEGER_ELT(elt, 0);
       if (v == NA_INTEGER) {
-        buf_push_all(buffer, "null", 4);
+        buffer = buf_push_all(buffer, "null", 4);
         break;
       }
       char vbuff[32];
       size_t written = snprintf(vbuff, 32, "%d", v);
-      buf_push_all(buffer, vbuff, written);
+      buffer = buf_push_all(buffer, vbuff, written);
       break;
     }
     case REALSXP: {
       double v = REAL_ELT(elt, 0);
       if (!R_finite(v)) {
         /* TODO: Write out Inf, -Inf, and NaN? */
-        buf_push_all(buffer, "null", 4);
+        buffer = buf_push_all(buffer, "null", 4);
         break;
       }
       char vbuff[32];
       size_t written = snprintf(vbuff, 32, "%.*g", LOGFMT_SIG_DIGITS, v);
-      buf_push_all(buffer, vbuff, written);
+      buffer = buf_push_all(buffer, vbuff, written);
       break;
     }
     case CPLXSXP:
@@ -152,7 +153,7 @@ SEXP R_encode_logfmt(SEXP list)
     case STRSXP: {
       elt = STRING_ELT(elt, 0);
       if (elt == NA_STRING) {
-        buf_push_all(buffer, "null", 4);
+        buffer = buf_push_all(buffer, "null", 4);
         break;
       }
       str = CHAR(elt);
@@ -173,7 +174,7 @@ SEXP R_encode_logfmt(SEXP list)
       break;
     }
     default:
-      buf_push_all(buffer, "<omitted>", 9);
+      buffer = buf_push_all(buffer, "<omitted>", 9);
       break;
     }
   }
