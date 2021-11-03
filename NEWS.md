@@ -1,4 +1,4 @@
-# log4r 0.4.1.9000
+# log4r 0.4.2
 
 * Fixes a crash where `logfmt_log_layout()` would not correctly handle memory
   reallocation of the underlying buffer.
