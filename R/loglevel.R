@@ -63,8 +63,14 @@ loglevel <- function(i)
     stop("loglevel accepts only atomic values")
 
   if (is.numeric(i)) {
-    i <- min(i, length(LEVELS))
+    if (i <= 0) {
+      i <- 1
+      return(structure(LEVELS[[i]], class = "loglevel"))
+    }
+    i <- min(i, length(LEVELS) - 1)
     i <- max(i, 1)
+    i <- i + 1 # bumps up number for TRACE
+    print
   } else if (is.character(i)) {
     name <- i
     i <- which(name == levels(LEVELS))
@@ -105,10 +111,11 @@ available.loglevels <- function() lapply(stats::setNames(nm = LEVEL_NAMES), logl
 verbosity <- function(v) {
   if (!is.numeric(v))
     stop("numeric expected")
-  loglevel(length(LEVELS) + 1 - v)
+  loglevel(length(LEVELS) - v)
 }
 
 # Deprecated.
+TRACE <- loglevel("TRACE")
 DEBUG <- loglevel("DEBUG")
 INFO <- loglevel("INFO")
 WARN <- loglevel("WARN")
