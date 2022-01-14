@@ -12,20 +12,23 @@ test_that('Logger levels', {
   logger <- create.logger()
   logfile(logger) <- file.path('base.log')
 
-  level(logger) <- log4r:::DEBUG
+  level(logger) <- log4r:::TRACE
   expect_true(level(logger) == 1)
 
-  level(logger) <- log4r:::INFO
+  level(logger) <- log4r:::DEBUG
   expect_true(level(logger) == 2)
 
-  level(logger) <- log4r:::WARN
+  level(logger) <- log4r:::INFO
   expect_true(level(logger) == 3)
 
-  level(logger) <- log4r:::ERROR
+  level(logger) <- log4r:::WARN
   expect_true(level(logger) == 4)
 
-  level(logger) <- log4r:::FATAL
+  level(logger) <- log4r:::ERROR
   expect_true(level(logger) == 5)
+
+  level(logger) <- log4r:::FATAL
+  expect_true(level(logger) == 6)
 
   unlink(logfile(logger))
 })

@@ -8,6 +8,6 @@ test_that("The verbosity() constructor creates equivalent log levels", {
   expect_equal(verbosity(3), WARN)
   expect_equal(verbosity(4), INFO)
   expect_equal(verbosity(5), DEBUG)
-  expect_equal(verbosity(6), DEBUG)
-  expect_equal(verbosity(60), DEBUG)
+  expect_equal(verbosity(6), TRACE)
+  expect_equal(verbosity(60), TRACE)
 })

@@ -1,8 +1,8 @@
 context("loglevel")
 
 test_that("The loglevel() constructor works as expected", {
-  expect_equal(loglevel(-19), DEBUG)
-  expect_equal(loglevel(-1), DEBUG)
+  expect_equal(loglevel(-19), TRACE)
+  expect_equal(loglevel(-1), TRACE)
   expect_equal(loglevel(1), DEBUG)
   expect_equal(loglevel(2), INFO)
   expect_equal(loglevel(3), WARN)
@@ -10,6 +10,7 @@ test_that("The loglevel() constructor works as expected", {
   expect_equal(loglevel(5), FATAL)
   expect_equal(loglevel(6), FATAL)
   expect_equal(loglevel(60), FATAL)
+  expect_equal(loglevel("TRACE"), TRACE)
   expect_equal(loglevel("DEBUG"), DEBUG)
   expect_equal(loglevel("INFO"), INFO)
   expect_equal(loglevel("WARN"), WARN)
@@ -24,11 +25,11 @@ test_that("The loglevel() constructor works as expected", {
 })
 
 test_that("Coercion works as expected", {
-  expect_equal(as.numeric(loglevel("DEBUG")), 1)
+  expect_equal(as.numeric(loglevel("DEBUG")), 2)
   expect_equal(as.character(loglevel("WARN")), "WARN")
   expect_equal(as.loglevel(loglevel("INFO")), loglevel("INFO"))
 })
 
 test_that("All log levels are available", {
-  expect_equal(unname(vapply(available.loglevels(), as.integer, integer(1))), 1:5)
+  expect_equal(unname(vapply(available.loglevels(), as.integer, integer(1))), 1:6)
 })
