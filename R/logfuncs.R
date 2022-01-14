@@ -13,6 +13,7 @@
 #' logger <- create.logger(logfile = 'debugging.log', level = "WARN")
 #'
 #' levellog(logger, 'WARN', 'First warning from our code')
+#' trace(logger, "Extra debugging information")
 #' debug(logger, 'Debugging our code')
 #' info(logger, 'Information about our code')
 #' warn(logger, 'Another warning from our code')
@@ -24,6 +25,13 @@ levellog <- function(logger, level, ...) {
   if (logger$threshold > level) return(invisible(NULL))
   for (appender in logger$appenders) {
     appender(level, ...)
+  }
+}
+
+log_trace <- function(logger, ...) {
+  if (logger$threshold > TRACE) return(invisible(NULL))
+  for (appender in logger$appenders) {
+    appnder("TRACE", ...)
   }
 }
 
@@ -61,6 +69,10 @@ log_fatal <- function(logger, ...) {
     appender("FATAL", ...)
   }
 }
+
+#' @rdname levellog
+#' @export
+trace <- log_trace
 
 #' @rdname levellog
 #' @export

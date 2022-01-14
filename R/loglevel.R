@@ -1,5 +1,5 @@
 # Internal use only.
-LEVEL_NAMES <- c("DEBUG", "INFO", "WARN", "ERROR", "FATAL")
+LEVEL_NAMES <- c("TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL")
 LEVELS <- factor(LEVEL_NAMES, levels = LEVEL_NAMES, ordered = TRUE)
 
 #' Logging levels
