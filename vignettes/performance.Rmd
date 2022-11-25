@@ -3,7 +3,7 @@ title: "Logging Performance"
 date: "Updated as of `r as.Date(Sys.time())`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{performance}
+  %\VignetteIndexEntry{Logging Performance}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

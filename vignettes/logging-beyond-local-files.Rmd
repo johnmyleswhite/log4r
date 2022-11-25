@@ -3,7 +3,7 @@ title: "Logging Beyond Local Files"
 date: "Updated as of `r as.Date(Sys.time())`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{logging-beyond-local-files}
+  %\VignetteIndexEntry{Logging Beyond Local Files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
