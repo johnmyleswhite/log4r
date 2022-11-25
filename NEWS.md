@@ -1,3 +1,8 @@
+# log4r 0.4.2.9000
+
+* Fixes a potential memory corruption issue identified by rchk. Thanks to Tomas
+  Kalibera for the associated patch.
+
 # log4r 0.4.2
 
 * Fixes a crash where `logfmt_log_layout()` would not correctly handle memory

@@ -71,6 +71,7 @@ SEXP R_encode_logfmt(SEXP list)
   if (len == 0 || keys == R_NilValue) {
     return R_BlankScalarString;
   }
+  PROTECT(keys);
   char *buffer = NULL;
   buf_grow(buffer, 256);
 
@@ -181,5 +182,6 @@ SEXP R_encode_logfmt(SEXP list)
   buf_push(buffer, '\n');
   SEXP out = Rf_ScalarString(Rf_mkCharLen(buffer, buf_size(buffer)));
   buf_free(buffer);
+  UNPROTECT(1);
   return out;
 }
