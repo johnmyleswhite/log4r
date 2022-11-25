@@ -1,4 +1,4 @@
-# log4r 0.4.2.9000
+# log4r 0.4.3
 
 * Fixes a potential memory corruption issue identified by rchk. Thanks to Tomas
   Kalibera for the associated patch.
