@@ -3,10 +3,13 @@
 \name{appenders}
 \alias{appenders}
 \alias{console_appender}
+\alias{stderr_appender}
 \alias{file_appender}
 \title{Appenders}
 \usage{
 console_appender(layout = default_log_layout())
+
+stderr_appender(layout = default_log_layout())
 
 file_appender(file, append = TRUE, layout = default_log_layout())
 }
@@ -26,8 +29,8 @@ In \href{https://logging.apache.org/log4j/}{log4j} etymology,
 the nature of the destination, the format of the messages may be controlled
 using a \strong{\link[=layouts]{Layout}}.
 
-The most basic appenders log messages to the console or to a file; these are
-described below.
+The most basic appenders log messages to the console (stdout), stderr,
+or to a file; these are described below.
 
 For implementing your own appenders, see Details.
 }

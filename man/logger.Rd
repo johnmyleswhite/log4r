@@ -4,14 +4,19 @@
 \alias{logger}
 \title{Create Logger Objects}
 \usage{
-logger(threshold = "INFO", appenders = console_appender())
+logger(threshold = "INFO", appenders = NULL)
 }
 \arguments{
 \item{threshold}{The logging threshold level. Messages with a lower priority
 level will be discarded. See \code{\link{loglevel}}.}
 
 \item{appenders}{The logging appenders; both single appenders and a
-\code{list()} of them are supported. See \code{\link{appenders}}.}
+\code{list()} of them are supported. See \code{\link{appenders}}.
+The default value, `NULL`, creates an appender that should work well
+in your current environment. For example, if you are inside an `.Rmd`
+or `.qmd` it will log to `stderr()`, and if you're running on a CI
+service or in Posit connect, it will suppress the timestamps (since
+they will typically be added automatically).}
 }
 \value{
 An object of class \code{"logger"}.
