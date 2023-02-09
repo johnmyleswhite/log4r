@@ -83,12 +83,13 @@ logfmt_log_layout <- function() {
 #' @details \code{json_log_layout} requires the \code{jsonlite} package.
 #'
 #' @rdname layouts
-#' @aliases json_log_layout
+#' @param include_timestamp Include the current timestamp in the output?
 #' @export
-json_log_layout <- function() {
+json_log_layout <- function(include_timestamp = TRUE) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("The 'jsonlite' package is required to use this JSON layout.")
   }
+  force(include_timestamp)
   time_format <- "%Y-%m-%dT%H:%M:%SZ"
 
   function(level, ...) {
@@ -97,7 +98,9 @@ json_log_layout <- function() {
       fields <- list(message = paste0(fields, collapse = ""))
     }
     fields$level <- as.character(level)
-    fields$time <- fmt_current_time(time_format, TRUE)
+    if (include_timestamp) {
+      fields$time <- fmt_current_time(time_format, TRUE)
+    }
     jsonlite::toJSON(fields, auto_unbox = TRUE)
   }
 }

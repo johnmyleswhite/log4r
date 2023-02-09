@@ -1,5 +1,16 @@
 # log4r 0.4.2
 
+* New `stderr_appender()` that writes to stderr (useful for RMarkdown docs).
+
+* `json_log_layout()` gains `include_timestamp` argument which can be set
+  to `FALSE` if whatever system collating your logs already adds a timestamp.
+  
+* `logger()` uses a more complex algorithm to determine the default `logger`.
+  It uses `stderr_appender()` if you're running in knitr (so the result appears
+  in the log, and not in your doc) and it uses `simple_layout()` if you're
+  in a situation that's likely to automatically timestamps (i.e. running on
+  CI platform or in Posit connect).
+
 * Fixes a crash where `logfmt_log_layout()` would not correctly handle memory
   reallocation of the underlying buffer.
 

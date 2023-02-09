@@ -17,12 +17,14 @@ bare_log_layout()
 
 logfmt_log_layout()
 
-json_log_layout()
+json_log_layout(include_timestamp = TRUE)
 }
 \arguments{
 \item{time_format}{A valid format string for timestamps. See
 \code{\link[base]{strptime}}. For some layouts this can be \code{NA} to
 elide the timestamp.}
+
+\item{include_timestamp}{Include the current timestamp in the output?}
 }
 \description{
 In \href{https://logging.apache.org/log4j/}{log4j} etymology,

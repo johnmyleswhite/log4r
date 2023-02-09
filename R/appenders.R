@@ -7,8 +7,8 @@
 #' the nature of the destination, the format of the messages may be controlled
 #' using a \strong{\link[=layouts]{Layout}}.
 #'
-#' The most basic appenders log messages to the console or to a file; these are
-#' described below.
+#' The most basic appenders log messages to the console (stdout), stderr,
+#' or to a file; these are described below.
 #'
 #' For implementing your own appenders, see Details.
 #'
@@ -38,6 +38,12 @@
 #' @export
 console_appender <- function(layout = default_log_layout()) {
   file_appender(file = "", layout = layout)
+}
+
+#' @export
+#' @rdname appenders
+stderr_appender <- function(layout = default_log_layout()) {
+  file_appender(file = stderr(), layout = layout)
 }
 
 #' @param file The file to write messages to.

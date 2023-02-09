@@ -36,6 +36,11 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #'   level will be discarded. See \code{\link{loglevel}}.
 #' @param appenders The logging appenders; both single appenders and a
 #'   \code{list()} of them are supported. See \code{\link{appenders}}.
+#'   The default value, `NULL`, creates an appender that should work well
+#'   in your current environment. For example, if you are inside an `.Rmd`
+#'   or `.qmd` it will log to `stderr()`, and if you're running on a CI
+#'   service or in Posit connect, it will suppress the timestamps (since
+#'   they will typically be added automatically).
 #'
 #' @return An object of class \code{"logger"}.
 #'
@@ -54,8 +59,12 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #' for information on controlling the behaviour of the logger object.
 #'
 #' @export
-logger <- function(threshold = "INFO", appenders = console_appender()) {
+logger <- function(threshold = "INFO", appenders = NULL) {
   threshold <- as.loglevel(threshold)
+
+  if (is.null(appenders)) {
+    appenders <- default_appender()
+  }
   if (!is.list(appenders)) {
     appenders <- list(appenders)
   }
@@ -67,4 +76,29 @@ logger <- function(threshold = "INFO", appenders = console_appender()) {
     list(threshold = threshold, appenders = appenders),
     class = "logger"
   )
+}
+
+default_appender <- function() {
+  if (on_ci() || on_connect()) {
+    layout <- simple_log_layout()
+  } else {
+    layout <- default_log_layout()
+  }
+
+  if (is_knitr()) {
+    stderr_appender(layout)
+  } else {
+    console_appender(layout)
+  }
+}
+
+is_knitr <- function() {
+  isTRUE(getOption("knitr.in.progress", FALSE))
+}
+
+on_ci <- function() {
+  isTRUE(as.logical(Sys.getenv("CI")))
+}
+on_connect <- function() {
+  identical(Sys.getenv("RSTUDIO_PRODUCT"), "CONNECT")
 }
