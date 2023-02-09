@@ -13,9 +13,9 @@
 
 #' Maintainer: Kirill Müller <krlmlr+r@@mailbox.org>
 #'
-#' URL: \url{https://github.com/johnmyleswhite/log4r}
+#' URL: <https://github.com/johnmyleswhite/log4r>
 #'
-#' Issue tracker: \url{https://github.com/johnmyleswhite/log4r/issues}
+#' Issue tracker: <https://github.com/johnmyleswhite/log4r/issues>
 #'
 #' @name log4r-package
 #' @aliases log4r-package log4r

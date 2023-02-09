@@ -8,10 +8,10 @@ logger(threshold = "INFO", appenders = console_appender())
 }
 \arguments{
 \item{threshold}{The logging threshold level. Messages with a lower priority
-level will be discarded. See \code{\link{loglevel}}.}
+level will be discarded. See \code{\link[=loglevel]{loglevel()}}.}
 
 \item{appenders}{The logging appenders; both single appenders and a
-\code{list()} of them are supported. See \code{\link{appenders}}.}
+\code{list()} of them are supported. See \code{\link[=appenders]{appenders()}}.}
 }
 \value{
 An object of class \code{"logger"}.

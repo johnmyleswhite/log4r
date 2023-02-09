@@ -13,7 +13,7 @@ file_appender(file, append = TRUE, layout = default_log_layout())
 \arguments{
 \item{layout}{A layout function taking a \code{level} parameter and
 additional arguments corresponding to the message. See
-\code{\link{layouts}}.}
+\code{\link[=layouts]{layouts()}}.}
 
 \item{file}{The file to write messages to.}
 
@@ -33,7 +33,7 @@ For implementing your own appenders, see Details.
 }
 \details{
 Appenders are implemented as functions with the interface
-\code{function(level, ...)}. These functions are expected to write their
+\verb{function(level, ...)}. These functions are expected to write their
 arguments to a destination and return \code{invisible(NULL)}.
 }
 \examples{
@@ -44,6 +44,6 @@ appender("INFO", "Input has length ", 0, ".")
 
 }
 \seealso{
-\code{\link{tcp_appender}}, \code{\link{http_appender}},
-  \code{\link{syslog_appender}}
+\code{\link[=tcp_appender]{tcp_appender()}}, \code{\link[=http_appender]{http_appender()}},
+\code{\link[=syslog_appender]{syslog_appender()}}
 }

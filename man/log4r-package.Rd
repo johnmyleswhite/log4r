@@ -17,7 +17,7 @@ Version: \tab 0.2\cr
 Date: \tab 2014-09-29\cr
 License: \tab Artistic-2.0\cr
 LazyLoad: \tab yes\cr }
-Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
+Maintainer: Kirill Müller \href{mailto:krlmlr+r@mailbox.org}{krlmlr+r@mailbox.org}
 
 URL: \url{https://github.com/johnmyleswhite/log4r}
 

@@ -4,8 +4,12 @@
 \alias{tcp_appender}
 \title{Log Messages via TCP}
 \usage{
-tcp_appender(host, port, layout = default_log_layout(),
-  timeout = getOption("timeout"))
+tcp_appender(
+  host,
+  port,
+  layout = default_log_layout(),
+  timeout = getOption("timeout")
+)
 }
 \arguments{
 \item{host}{Hostname for the socket connection.}
@@ -21,7 +25,7 @@ additional arguments corresponding to the message.}
 Append messages to arbitrary TCP destinations.
 }
 \seealso{
-\code{\link{appenders}} for more information on Appenders, and
-  \code{\link[base]{socketConnection}} for the underlying connection object
-  used by \code{tcp_appender}.
+\code{\link[=appenders]{appenders()}} for more information on Appenders, and
+\code{\link[base:connections]{base::socketConnection()}} for the underlying connection object
+used by \code{tcp_appender}.
 }
