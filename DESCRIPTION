@@ -29,9 +29,10 @@ Suggests:
     rlog,
     rmarkdown,
     rsyslog,
-    testthat
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyLoad: yes
 Roxygen: list(old_usage = TRUE)
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
+Config/testthat/edition: 3

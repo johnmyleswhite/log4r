@@ -1,5 +1,3 @@
-context("layouts")
-
 test_that("Basic layouts work correctly", {
   layout <- simple_log_layout()
   expect_match(layout("INFO", "Message"), "Message")

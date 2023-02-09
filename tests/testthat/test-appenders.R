@@ -1,5 +1,3 @@
-context("appenders")
-
 test_that("The console appender works correctly", {
   appender <- console_appender(simple_log_layout())
   expect_output(appender("Message"), "Message")

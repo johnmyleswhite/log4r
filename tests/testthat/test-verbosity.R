@@ -1,5 +1,3 @@
-context("verbosity")
-
 test_that("The verbosity() constructor creates equivalent log levels", {
   expect_equal(verbosity(-19), FATAL)
   expect_equal(verbosity(-1), FATAL)
