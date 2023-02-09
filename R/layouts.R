@@ -2,9 +2,8 @@
 #'
 #' @description
 #'
-#' In \href{https://logging.apache.org/log4j/}{log4j} etymology,
-#' \strong{Layouts} are how \strong{\link[=appenders]{Appenders}} control the
-#' format of messages.
+#' In [log4j](https://logging.apache.org/log4j/) etymology, **Layouts** are how
+#' **[Appenders][appenders]** control the format of messages.
 #'
 #' Some general-purpose layouts are described below.
 #'
@@ -13,11 +12,11 @@
 #' @details
 #'
 #' Layouts are implemented as functions with the interface
-#' \code{function(level, ...)} and returning a single string.
+#' `function(level, ...)` and returning a single string.
 #'
 #' @param time_format A valid format string for timestamps. See
-#'   \code{\link[base]{strptime}}. For some layouts this can be \code{NA} to
-#'   elide the timestamp.
+#'   [base::strptime()]. For some layouts this can be `NA` to elide the
+#'   timestamp.
 #'
 #' @examples
 #' # The behaviour of a layout can be seen by using them directly:
@@ -80,7 +79,7 @@ logfmt_log_layout <- function() {
   }
 }
 
-#' @details \code{json_log_layout} requires the \code{jsonlite} package.
+#' @details `json_log_layout` requires the `jsonlite` package.
 #'
 #' @rdname layouts
 #' @aliases json_log_layout

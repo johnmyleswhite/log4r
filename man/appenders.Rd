@@ -11,9 +11,8 @@ console_appender(layout = default_log_layout())
 file_appender(file, append = TRUE, layout = default_log_layout())
 }
 \arguments{
-\item{layout}{A layout function taking a \code{level} parameter and
-additional arguments corresponding to the message. See
-\code{\link{layouts}}.}
+\item{layout}{A layout function taking a \code{level} parameter and additional
+arguments corresponding to the message. See \code{\link[=layouts]{layouts()}}.}
 
 \item{file}{The file to write messages to.}
 
@@ -21,10 +20,10 @@ additional arguments corresponding to the message. See
 the first time.}
 }
 \description{
-In \href{https://logging.apache.org/log4j/}{log4j} etymology,
-\strong{Appenders} are destinations where messages are written. Depending on
-the nature of the destination, the format of the messages may be controlled
-using a \strong{\link[=layouts]{Layout}}.
+In \href{https://logging.apache.org/log4j/}{log4j} etymology, \strong{Appenders} are
+destinations where messages are written. Depending on the nature of the
+destination, the format of the messages may be controlled using a
+\strong{\link[=layouts]{Layout}}.
 
 The most basic appenders log messages to the console or to a file; these are
 described below.
@@ -32,9 +31,8 @@ described below.
 For implementing your own appenders, see Details.
 }
 \details{
-Appenders are implemented as functions with the interface
-\code{function(level, ...)}. These functions are expected to write their
-arguments to a destination and return \code{invisible(NULL)}.
+Appenders are implemented as functions with the interface \verb{function(level, ...)}. These functions are expected to write their arguments to a destination
+and return \code{invisible(NULL)}.
 }
 \examples{
 # The behaviour of an appender can be seen by using them directly; the
@@ -44,6 +42,5 @@ appender("INFO", "Input has length ", 0, ".")
 
 }
 \seealso{
-\code{\link{tcp_appender}}, \code{\link{http_appender}},
-  \code{\link{syslog_appender}}
+\code{\link[=tcp_appender]{tcp_appender()}}, \code{\link[=http_appender]{http_appender()}}, \code{\link[=syslog_appender]{syslog_appender()}}
 }

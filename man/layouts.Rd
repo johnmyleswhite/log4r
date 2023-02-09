@@ -21,13 +21,12 @@ json_log_layout()
 }
 \arguments{
 \item{time_format}{A valid format string for timestamps. See
-\code{\link[base]{strptime}}. For some layouts this can be \code{NA} to
-elide the timestamp.}
+\code{\link[base:strptime]{base::strptime()}}. For some layouts this can be \code{NA} to elide the
+timestamp.}
 }
 \description{
-In \href{https://logging.apache.org/log4j/}{log4j} etymology,
-\strong{Layouts} are how \strong{\link[=appenders]{Appenders}} control the
-format of messages.
+In \href{https://logging.apache.org/log4j/}{log4j} etymology, \strong{Layouts} are how
+\strong{\link[=appenders]{Appenders}} control the format of messages.
 
 Some general-purpose layouts are described below.
 
@@ -35,7 +34,7 @@ For implementing your own layouts, see Details.
 }
 \details{
 Layouts are implemented as functions with the interface
-\code{function(level, ...)} and returning a single string.
+\verb{function(level, ...)} and returning a single string.
 
 \code{json_log_layout} requires the \code{jsonlite} package.
 }

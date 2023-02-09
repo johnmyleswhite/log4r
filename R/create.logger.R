@@ -1,12 +1,12 @@
 #' Creates a logger object.
 #'
 #' @param logfile The full pathname of the file you want log messages to be
-#' written to.
-#' @param level The level at which the logger is initialized.  Will be coerced
-#'   using \code{\link{as.loglevel}}.
+#'   written to.
+#' @param level The level at which the logger is initialized. Will be coerced
+#'   using [as.loglevel()].
 #' @param logformat The format string used when writing messages to the log
-#' file.
-#' @seealso \code{\link{loglevel}}, \code{\link{level.logger}}
+#'   file.
+#' @seealso [loglevel()], [level.logger()]
 #' @examples
 #'
 #' library('log4r')
@@ -27,17 +27,17 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #' Create Logger Objects
 #'
 #' This is the main interface for configuring logging behaviour. We adopt the
-#' well-known \href{https://logging.apache.org/log4j/}{log4j} etymology:
-#' \strong{\link[=appenders]{Appenders}} are destinations (e.g. the console or
-#' a file) where messages are written, and the \strong{\link[=layouts]{Layout}}
-#' is the format of the messages.
+#' well-known [log4j](https://logging.apache.org/log4j/) etymology:
+#' **[Appenders][appenders]** are destinations (e.g. the console or a file)
+#' where messages are written, and the **[Layout][layouts]** is the format of
+#' the messages.
 #'
 #' @param threshold The logging threshold level. Messages with a lower priority
-#'   level will be discarded. See \code{\link{loglevel}}.
-#' @param appenders The logging appenders; both single appenders and a
-#'   \code{list()} of them are supported. See \code{\link{appenders}}.
+#'   level will be discarded. See [loglevel()].
+#' @param appenders The logging appenders; both single appenders and a `list()`
+#'   of them are supported. See [appenders()].
 #'
-#' @return An object of class \code{"logger"}.
+#' @return An object of class `"logger"`.
 #'
 #' @examples
 #' # By default, messages are logged to the console at the
@@ -50,8 +50,8 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #'
 #' @seealso
 #'
-#' \strong{\link[=appenders]{Appenders}} and \strong{\link[=layouts]{Layouts}}
-#' for information on controlling the behaviour of the logger object.
+#' **[Appenders][appenders]** and **[Layouts][layouts]** for information on
+#' controlling the behaviour of the logger object.
 #'
 #' @export
 logger <- function(threshold = "INFO", appenders = console_appender()) {

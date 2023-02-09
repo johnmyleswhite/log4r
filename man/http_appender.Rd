@@ -14,7 +14,7 @@ http_appender(url, method = "POST", layout = default_log_layout(), ...)
 \item{layout}{A layout function taking a \code{level} parameter and
 additional arguments corresponding to the message.}
 
-\item{...}{Further arguments passed on to \code{\link[httr]{POST}}.}
+\item{...}{Further arguments passed on to \code{\link[httr:POST]{httr::POST()}}.}
 }
 \description{
 Send messages in the body of HTTP requests. Responses with status code 400
@@ -38,5 +38,5 @@ appender("INFO", "Message.")
 
 }
 \seealso{
-\code{\link{appenders}} for more information on Appenders.
+\code{\link[=appenders]{appenders()}} for more information on Appenders.
 }

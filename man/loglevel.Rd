@@ -50,9 +50,9 @@ output, warning message, error message or fatal error.  Each logger only
 prints log entries where the log level is equal or above its threshold.
 }
 \details{
-To specify a logging level, use a character value, e.g. \code{"WARN"},
-or an integer between 1 and 5. The function \code{available.levels} lists all
-possible logging levels.
+To specify a logging level, use a character value, e.g. \code{"WARN"}, or an
+integer between 1 and 5. The function \code{available.levels} lists all possible
+logging levels.
 }
 \examples{
 loglevel(2) == loglevel("INFO")
