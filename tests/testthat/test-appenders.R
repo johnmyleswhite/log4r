@@ -15,6 +15,8 @@ test_that("The file appender works correctly", {
 
 test_that("The HTTP appender works correctly", {
   skip_if_not_installed("httr")
+  # Don't send actual HTTP requests on CRAN.
+  skip_on_cran()
 
   appender <- http_appender("http://example.com", layout = simple_log_layout())
   expect_silent(appender("INFO", "Message"))
@@ -23,9 +25,6 @@ test_that("The HTTP appender works correctly", {
     "http://example.com", "POST", layout = bare_log_layout(),
     httr::content_type_json()
   ))
-
-  # Don't send actual HTTP requests on CRAN.
-  skip_on_cran()
   expect_silent(appender("INFO", '{"message":"Message"}'))
 })
 
