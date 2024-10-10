@@ -2,51 +2,33 @@
 % Please edit documentation in R/log4r-package.R
 \docType{package}
 \name{log4r-package}
-\alias{log4r-package}
 \alias{log4r}
-\title{A simple logging system for R, based on log4j.}
+\alias{log4r-package}
+\title{log4r: A Fast and Lightweight Logging System for R, Based on 'log4j'}
 \description{
-logr4 provides an object-oriented logging system that uses an API roughly
-equivalent to log4j and its related variants.
+The log4r package is meant to provide a fast, lightweight, object-oriented approach to logging in R based on the widely-emulated 'log4j' system and etymology.
 }
-\details{
-\tabular{ll}{
-Package: \tab log4r\cr
-Type: \tab Package\cr
-Version: \tab 0.2\cr
-Date: \tab 2014-09-29\cr
-License: \tab Artistic-2.0\cr
-LazyLoad: \tab yes\cr }
-Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
-
-URL: \url{https://github.com/johnmyleswhite/log4r}
-
-Issue tracker: \url{https://github.com/johnmyleswhite/log4r/issues}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/johnmyleswhite/log4r}
+  \item Report bugs at \url{https://github.com/johnmyleswhite/log4r/issues}
 }
-\examples{
 
-# Import the log4r package.
-library('log4r')
-
-# Create a new logger object with create.logger().
-logger <- create.logger()
-
-# Set the logger's file output.
-logfile(logger) <- 'base.log'
-
-# Set the current level of the logger.
-level(logger) <- 'INFO'
-
-# Try logging messages with different priorities.
-# At priority level INFO, a call to debug() won't print anything.
-debug(logger, 'A Debugging Message')
-info(logger, 'An Info Message')
-warn(logger, 'A Warning Message')
-error(logger, 'An Error Message')
-fatal(logger, 'A Fatal Error Message')
 }
-\references{
-See the log4j documentation or the documentation for its many
-derivatives to understand the origins of this logging system.
+\author{
+\strong{Maintainer}: Aaron Jacobs \email{atheriel@gmail.com}
+
+Authors:
+\itemize{
+  \item John Myles White [copyright holder]
 }
-\keyword{package}
+
+Other contributors:
+\itemize{
+  \item Kenton White [contributor]
+  \item Kirill Müller \email{krlmlr+r@mailbox.org} [contributor]
+}
+
+}
+\keyword{internal}
