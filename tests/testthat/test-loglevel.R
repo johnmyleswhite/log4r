@@ -1,5 +1,3 @@
-context("loglevel")
-
 test_that("The loglevel() constructor works as expected", {
   expect_equal(loglevel(-19), DEBUG)
   expect_equal(loglevel(-1), DEBUG)

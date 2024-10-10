@@ -1,5 +1,3 @@
-context("acceptance")
-
 test_that('Creation', {
   logger <- create.logger()
   expect_s3_class(logger, "logger")
