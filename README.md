@@ -7,7 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/log4r)](https://cran.r-project.org/package=log4r)
-[![R-CMD-check](https://github.com/johnmyleswhite/log4r/workflows/R-CMD-check/badge.svg)](https://github.com/johnmyleswhite/log4r/actions)
+[![R-CMD-check](https://github.com/johnmyleswhite/log4r/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/johnmyleswhite/log4r/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **log4r** is a fast, lightweight, object-oriented approach to logging in
