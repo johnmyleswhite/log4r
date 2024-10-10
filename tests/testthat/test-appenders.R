@@ -18,11 +18,15 @@ test_that("The HTTP appender works correctly", {
   # Don't send actual HTTP requests on CRAN.
   skip_on_cran()
 
-  appender <- http_appender("http://example.com", layout = simple_log_layout())
+  appender <- http_appender(
+    "http://httpbin.org/post", layout = simple_log_layout()
+  )
   expect_silent(appender("INFO", "Message"))
 
   appender <- expect_silent(http_appender(
-    "http://example.com", "POST", layout = bare_log_layout(),
+    "http://httpbin.org/post",
+    method = "POST",
+    layout = bare_log_layout(),
     httr::content_type_json()
   ))
   expect_silent(appender("INFO", '{"message":"Message"}'))
@@ -32,7 +36,7 @@ test_that("The HTTP appender accepts only valid verbs", {
   skip_if_not_installed("httr")
 
   expect_error(
-    http_appender("http://example.com", method = "INVALID"),
+    http_appender("http://httpbin.org/post", method = "INVALID"),
     regex = "not a supported HTTP method"
   )
 })
