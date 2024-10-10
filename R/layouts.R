@@ -98,7 +98,7 @@ json_log_layout <- function() {
     }
     fields$level <- as.character(level)
     fields$time <- fmt_current_time(time_format, TRUE)
-    jsonlite::toJSON(fields, auto_unbox = TRUE)
+    sprintf("%s\n", jsonlite::toJSON(fields, auto_unbox = TRUE))
   }
 }
 
