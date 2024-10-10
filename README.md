@@ -74,10 +74,10 @@ readLines(log_file)
 The `appenders` parameter takes a list, so you can log to multiple
 destinations transparently.
 
-For local development or simple batch R scripts run manually, writing log
-messages to a file for later inspection is convenient. However, for deployed R
-applications or automated scripts it is more likely you will need to send logs
-to a central location; see
+For local development or simple batch R scripts run manually, writing
+log messages to a file for later inspection is convenient. However, for
+deployed R applications or automated scripts it is more likely you will
+need to send logs to a central location; see
 `vignette("logging-beyond-local-files", package = "log4r")`.
 
 To control the format of the messages you can change the **Layout** used
