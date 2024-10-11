@@ -2,10 +2,10 @@
 #'
 #' @param logger An object of class 'logger'.
 #' @param level The desired priority level: a number, a character, or an object
-#'   of class 'loglevel'.  Will be coerced using \code{\link{as.loglevel}}.
+#'   of class 'loglevel'. Will be coerced using [as.loglevel()].
 #' @param ... One or more items to be written to the log at the corresponding
 #'   priority level.
-#' @seealso \code{\link{loglevel}}
+#' @seealso [loglevel()]
 #' @examples
 #'
 #' library('log4r')

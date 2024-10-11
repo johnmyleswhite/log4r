@@ -25,7 +25,7 @@ fatal(logger, ...)
 \item{logger}{An object of class 'logger'.}
 
 \item{level}{The desired priority level: a number, a character, or an object
-of class 'loglevel'.  Will be coerced using \code{\link{as.loglevel}}.}
+of class 'loglevel'. Will be coerced using \code{\link[=as.loglevel]{as.loglevel()}}.}
 
 \item{...}{One or more items to be written to the log at the corresponding
 priority level.}
@@ -47,5 +47,5 @@ error(logger, 'An error from our code')
 fatal(logger, "I'm outta here")
 }
 \seealso{
-\code{\link{loglevel}}
+\code{\link[=loglevel]{loglevel()}}
 }

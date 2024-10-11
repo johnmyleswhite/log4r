@@ -2,13 +2,12 @@
 #'
 #' The priority level can be an integer from the set 1..5 (otherwise it will be
 #' modified sensibly to fit in that range), or a named logging level (one of
-#' "DEBUG", "INFO", "WARN", "ERROR", or "FATAL"). An object of class loglevel
-#' is also accepted; other input will be coerced using
-#' \code{\link{as.loglevel}}.
+#' "DEBUG", "INFO", "WARN", "ERROR", or "FATAL"). An object of class loglevel is
+#' also accepted; other input will be coerced using [as.loglevel()].
 #'
 #' @param x An object of class logger.
 #' @param value A loglevel.
-#' @seealso \code{\link{loglevel}}
+#' @seealso [loglevel()]
 #' @examples
 #'
 #' library('log4r')

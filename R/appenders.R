@@ -2,10 +2,10 @@
 #'
 #' @description
 #'
-#' In \href{https://logging.apache.org/log4j/}{log4j} etymology,
-#' \strong{Appenders} are destinations where messages are written. Depending on
-#' the nature of the destination, the format of the messages may be controlled
-#' using a \strong{\link[=layouts]{Layout}}.
+#' In [log4j](https://logging.apache.org/log4j/) etymology, **Appenders** are
+#' destinations where messages are written. Depending on the nature of the
+#' destination, the format of the messages may be controlled using a
+#' **[Layout][layouts]**.
 #'
 #' The most basic appenders log messages to the console or to a file; these are
 #' described below.
@@ -14,13 +14,12 @@
 #'
 #' @details
 #'
-#' Appenders are implemented as functions with the interface
-#' \code{function(level, ...)}. These functions are expected to write their
-#' arguments to a destination and return \code{invisible(NULL)}.
+#' Appenders are implemented as functions with the interface `function(level,
+#' ...)`. These functions are expected to write their arguments to a destination
+#' and return `invisible(NULL)`.
 #'
-#' @param layout A layout function taking a \code{level} parameter and
-#'   additional arguments corresponding to the message. See
-#'   \code{\link{layouts}}.
+#' @param layout A layout function taking a `level` parameter and additional
+#'   arguments corresponding to the message. See [layouts()].
 #'
 #' @examples
 #' # The behaviour of an appender can be seen by using them directly; the
@@ -28,10 +27,7 @@
 #' appender <- console_appender()
 #' appender("INFO", "Input has length ", 0, ".")
 #'
-#' @seealso \code{\link{tcp_appender}}, \code{\link{http_appender}},
-#'   \code{\link{syslog_appender}}
-#'
-#'
+#' @seealso [tcp_appender()], [http_appender()], [syslog_appender()]
 #' @name appenders
 #' @rdname appenders
 #' @aliases console_appender
@@ -41,7 +37,7 @@ console_appender <- function(layout = default_log_layout()) {
 }
 
 #' @param file The file to write messages to.
-#' @param append When \code{TRUE}, the file is not truncated when opening for
+#' @param append When `TRUE`, the file is not truncated when opening for
 #'   the first time.
 #'
 #' @rdname appenders
@@ -67,13 +63,13 @@ file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
 #'
 #' @param host Hostname for the socket connection.
 #' @param port Port number for the socket connection.
-#' @param layout A layout function taking a \code{level} parameter and
+#' @param layout A layout function taking a `level` parameter and
 #'   additional arguments corresponding to the message.
 #' @param timeout Timeout for the connection.
 #'
-#' @seealso \code{\link{appenders}} for more information on Appenders, and
-#'   \code{\link[base]{socketConnection}} for the underlying connection object
-#'   used by \code{tcp_appender}.
+#' @seealso [appenders()] for more information on Appenders, and
+#'   [base::socketConnection()] for the underlying connection object
+#'   used by `tcp_appender`.
 #'
 #' @export
 tcp_appender <- function(host, port, layout = default_log_layout(),
@@ -99,13 +95,13 @@ tcp_appender <- function(host, port, layout = default_log_layout(),
 #' Send messages in the body of HTTP requests. Responses with status code 400
 #' or above will trigger errors.
 #'
-#' Requires the \code{httr} package.
+#' Requires the `httr` package.
 #'
 #' @param url The URL to submit messages to.
-#' @param method The HTTP method to use, usually \code{"POST"} or \code{"GET"}.
-#' @param layout A layout function taking a \code{level} parameter and
+#' @param method The HTTP method to use, usually `"POST"` or `"GET"`.
+#' @param layout A layout function taking a `level` parameter and
 #'   additional arguments corresponding to the message.
-#' @param ... Further arguments passed on to \code{\link[httr]{POST}}.
+#' @param ... Further arguments passed on to [httr::POST()].
 #'
 #' @examples
 #' \dontrun{
@@ -121,7 +117,7 @@ tcp_appender <- function(host, port, layout = default_log_layout(),
 #' appender("INFO", "Message.")
 #' }
 #'
-#' @seealso \code{\link{appenders}} for more information on Appenders.
+#' @seealso [appenders()] for more information on Appenders.
 #'
 #' @export
 http_appender <- function(url, method = "POST", layout = default_log_layout(),
@@ -151,14 +147,14 @@ http_appender <- function(url, method = "POST", layout = default_log_layout(),
 
 #' Log Messages to the Local Syslog
 #'
-#' Send messages to the local syslog. Requires the \code{rsyslog} package.
+#' Send messages to the local syslog. Requires the `rsyslog` package.
 #'
 #' @param identifier A string identifying the application.
-#' @param layout A layout function taking a \code{level} parameter and
+#' @param layout A layout function taking a `level` parameter and
 #'   additional arguments corresponding to the message.
-#' @param ... Further arguments passed on to \code{\link[rsyslog]{open_syslog}}.
+#' @param ... Further arguments passed on to [rsyslog::open_syslog()].
 #'
-#' @seealso \code{\link{appenders}} for more information on Appenders.
+#' @seealso [appenders()] for more information on Appenders.
 #'
 #' @export
 syslog_appender <- function(identifier, layout = bare_log_layout(), ...) {
