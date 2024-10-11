@@ -1,3 +1,15 @@
+# log4r 0.4.4
+
+* Fixes failing unit tests for the HTTP appender.
+
+* JSON logs now have newlines, as intended (#30, @brooklynbagel).
+
+* Updates the R CMD check GitHub Action to a modern version (#27, @hadley).
+
+* Updates the project to `testthat` 3e (#26, @hadley).
+
+* Updates `roxygen2` documentation to use Markdown syntax (#25, @hadley).
+
 # log4r 0.4.3
 
 * Fixes a potential memory corruption issue identified by rchk. Thanks to Tomas
