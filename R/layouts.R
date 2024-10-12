@@ -33,10 +33,11 @@
 default_log_layout <- function(time_format = "%Y-%m-%d %H:%M:%S") {
   stopifnot(is.character(time_format))
   verify_time_format(time_format)
+  timestamp <- fmt_current_time(time_format, FALSE)
 
   function(level, ...) {
     msg <- paste0(..., collapse = "")
-    sprintf("%-5s [%s] %s\n", level, fmt_current_time(time_format), msg)
+    sprintf("%-5s [%s] %s\n", level, timestamp(), msg)
   }
 }
 
@@ -64,17 +65,14 @@ bare_log_layout <- function() {
 #' @aliases logfmt_log_layout
 #' @export
 logfmt_log_layout <- function() {
-  time_format <- "%Y-%m-%dT%H:%M:%SZ"
+  timestamp <- fmt_current_time("%Y-%m-%dT%H:%M:%OSZ", TRUE)
 
   function(level, ...) {
     fields <- list(...)
     if (is.null(names(fields))) {
       fields <- list(msg = paste0(fields, collapse = ""))
     }
-    extra <- list(level = level)
-    if (!is.na(time_format)) {
-      extra$ts <- fmt_current_time(time_format, TRUE)
-    }
+    extra <- list(level = level, ts = timestamp())
     encode_logfmt(c(extra, fields))
   }
 }
@@ -88,7 +86,7 @@ json_log_layout <- function() {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("The 'jsonlite' package is required to use this JSON layout.")
   }
-  time_format <- "%Y-%m-%dT%H:%M:%SZ"
+  timestamp <- fmt_current_time("%Y-%m-%dT%H:%M:%OSZ", TRUE)
 
   function(level, ...) {
     fields <- list(...)
@@ -96,18 +94,36 @@ json_log_layout <- function() {
       fields <- list(message = paste0(fields, collapse = ""))
     }
     fields$level <- as.character(level)
-    fields$time <- fmt_current_time(time_format, TRUE)
+    fields$time <- timestamp()
     sprintf("%s\n", jsonlite::toJSON(fields, auto_unbox = TRUE))
   }
 }
 
-# Fast C wrapper of strftime() and localtime(). Use with caution.
+# Given a strftime format string, return a fast function that outputs the
+# current time in that format. This is about 1000x faster than using
+# format(Sys.now()).
 fmt_current_time <- function(format, use_utc = FALSE) {
-  .Call(R_fmt_current_time, format, use_utc)
+  if (!grepl("%OS", format, fixed = TRUE)) {
+    return(compiler::cmpfun(function() {
+      .Call(R_fmt_current_time, format, use_utc, FALSE, NULL, PACKAGE = "log4r")
+    }))
+  }
+  # If we need fractional seconds, break formatting into three pieces: (1) the
+  # bit before %OS; (2) %S plus fractional seconds; and (3) the bit after %OS,
+  # if any.
+  split <- strsplit(format, "%OS[0-9]?")[[1]]
+  prefix <- paste0(split[1], "%S")
+  suffix <- NULL
+  if (length(split) > 1) {
+    suffix <- split[2]
+  }
+  compiler::cmpfun(function() {
+    .Call(R_fmt_current_time, prefix, use_utc, TRUE, suffix, PACKAGE = "log4r")
+  })
 }
 
 verify_time_format <- function(time_format) {
-  tryCatch(fmt_current_time(time_format), error = function(e) {
+  tryCatch(fmt_current_time(time_format)(), error = function(e) {
     stop("Invalid strptime format string. See ?strptime.", call. = FALSE)
   })
 }
