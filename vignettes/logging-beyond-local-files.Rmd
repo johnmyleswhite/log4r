@@ -103,10 +103,10 @@ logger <- logger(
 ```
 
 [^1]: Such as [Splunk](https://www.splunk.com/) or
-[Loggly](https://www.loggly.com/solution/log-management/). There is also are
-also many open-source options, such as the [ELK
-Stack](https://www.elastic.co/what-is/elk-stack) or
-[Graylog](https://www.graylog.org/).
+      [Loggly](https://www.loggly.com/solution/log-management/). There are also
+      many open-source options, such as the [ELK
+      Stack](https://www.elastic.co/elastic-stack/) or
+      [Graylog](https://graylog.org/).
 
 [^2]: For example, when running as a Docker container in a cluster with all logs
 forwarded automatically, or when scripts are wrapped up as SystemD unit files.
