@@ -78,7 +78,7 @@ have a log message with fields like the following:
 
 ```{r json-example}
 # Here "req" and "res" are slightly fake request & response objects.
-info(
+log_info(
   logger, message = "authentication failed",
   method = req$REQUEST_METHOD,
   path = req$PATH_INFO,
@@ -102,7 +102,7 @@ As an example, you might have the following in a script that processes many CSV
 files:
 
 ```{r logfmt-example}
-info(
+log_info(
   logger, message = "processed entries", file = filename,
   entries = nrow(entries),
   elapsed = unclass(difftime(Sys.time(), start, units = "secs"))
