@@ -1,3 +1,8 @@
+# log4r 0.4.4.9000
+
+* `logfmt_log_layout()` and `json_log_layout()` now use timestamps with
+  microsecond precision, when possible.
+
 # log4r 0.4.4
 
 * Fixes failing unit tests for the HTTP appender.
