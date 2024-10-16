@@ -1,32 +1,30 @@
-#' Write messages to logs at a given priority level.
+#' Write logs at a given level
 #'
-#' @param logger An object of class 'logger'.
-#' @param level The desired priority level: a number, a character, or an object
-#'   of class 'loglevel'. Will be coerced using [as.loglevel()].
-#' @param ... One or more items to be written to the log at the corresponding
-#'   priority level.
-#' @seealso [loglevel()]
+#' @param logger An object of class `"logger"`.
+#' @param level The desired severity, one of `"DEBUG"`, `"INFO"`, `"WARN"`,
+#'   `"ERROR"`, or `"FATAL"`. Messages with a lower severity than the logger
+#'   threshold will be discarded.
+#' @param ... One or more items to log.
 #' @examples
+#' logger <- logger()
 #'
-#' library('log4r')
-#'
-#' logger <- create.logger(logfile = 'debugging.log', level = "WARN")
-#'
-#' levellog(logger, 'WARN', 'First warning from our code')
-#' debug(logger, 'Debugging our code')
-#' info(logger, 'Information about our code')
-#' warn(logger, 'Another warning from our code')
-#' error(logger, 'An error from our code')
-#' fatal(logger, "I'm outta here")
+#' log_at(logger, "WARN", "First warning from our code")
+#' log_debug(logger, "Debugging our code")
+#' log_info(logger, "Information about our code")
+#' log_warn(logger, "Another warning from our code")
+#' log_error(logger, "An error from our code")
+#' log_fatal(logger, "I'm outta here")
 #' @export
-levellog <- function(logger, level, ...) {
-  level <- as.loglevel(level)
+log_at <- function(logger, level, ...) {
+  level <- as_level(level)
   if (logger$threshold > level) return(invisible(NULL))
   for (appender in logger$appenders) {
     appender(level, ...)
   }
 }
 
+#' @rdname log_at
+#' @export
 log_debug <- function(logger, ...) {
   if (logger$threshold > DEBUG) return(invisible(NULL))
   for (appender in logger$appenders) {
@@ -34,6 +32,8 @@ log_debug <- function(logger, ...) {
   }
 }
 
+#' @rdname log_at
+#' @export
 log_info <- function(logger, ...) {
   if (logger$threshold > INFO) return(invisible(NULL))
   for (appender in logger$appenders) {
@@ -41,6 +41,8 @@ log_info <- function(logger, ...) {
   }
 }
 
+#' @rdname log_at
+#' @export
 log_warn <- function(logger, ...) {
   if (logger$threshold > WARN) return(invisible(NULL))
   for (appender in logger$appenders) {
@@ -48,6 +50,8 @@ log_warn <- function(logger, ...) {
   }
 }
 
+#' @rdname log_at
+#' @export
 log_error <- function(logger, ...) {
   if (logger$threshold > ERROR) return(invisible(NULL))
   for (appender in logger$appenders) {
@@ -55,29 +59,11 @@ log_error <- function(logger, ...) {
   }
 }
 
+#' @rdname log_at
+#' @export
 log_fatal <- function(logger, ...) {
   # NOTE: It should not be possible to have a higher threshold, so don't check.
   for (appender in logger$appenders) {
     appender("FATAL", ...)
   }
 }
-
-#' @rdname levellog
-#' @export
-debug <- log_debug
-
-#' @rdname levellog
-#' @export
-info <- log_info
-
-#' @rdname levellog
-#' @export
-warn <- log_warn
-
-#' @rdname levellog
-#' @export
-error <- log_error
-
-#' @rdname levellog
-#' @export
-fatal <- log_fatal

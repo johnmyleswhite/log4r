@@ -48,11 +48,11 @@ messages below the `"INFO"` level:
 ``` r
 logger <- logger()
 
-info(logger, "Located nearest gas station.")
+log_info(logger, "Located nearest gas station.")
 #> INFO  [2019-09-04 16:31:04] Located nearest gas station.
-warn(logger, "Ez-Gas sensor network is not available.")
+log_warn(logger, "Ez-Gas sensor network is not available.")
 #> WARN  [2019-09-04 16:31:04] Ez-Gas sensor network is not available.
-debug(logger, "Debug messages are suppressed by default.")
+log_debug(logger, "Debug messages are suppressed by default.")
 ```
 
 Logging destinations are controlled by **Appenders**, a few of which are
@@ -63,8 +63,8 @@ messages to a file:
 log_file <- tempfile()
 logger <- logger("DEBUG", appenders = file_appender(log_file))
 
-info(logger, "Messages are now written to the file instead.")
-debug(logger, "Debug messages are now visible.")
+log_info(logger, "Messages are now written to the file instead.")
+log_debug(logger, "Debug messages are now visible.")
 
 readLines(log_file)
 #> [1] "INFO  [2019-09-04 16:31:04] Messages are now written to the file instead."
@@ -90,7 +90,7 @@ my_layout <- function(level, ...) {
 }
 
 logger <- logger(appenders = console_appender(my_layout))
-info(logger, "Messages should now look a little different.")
+log_info(logger, "Messages should now look a little different.")
 #> 2019-09-04 16:31:04 [INFO] Messages should now look a little different.
 ```
 
@@ -99,7 +99,7 @@ enriching log messages with contextual fields:
 
 ``` r
 logger <- logger(appenders = console_appender(logfmt_log_layout()))
-info(
+log_info(
   logger, message = "processed entries", file = "catpics_01.csv",
   entries = 4124, elapsed = 2.311
 )
@@ -108,7 +108,8 @@ info(
 
 ## Older APIs
 
-The 0.2 API is still supported:
+The 0.2 API is still supported, but will issue deprecation warnings when
+used:
 
 ``` r
 logger <- create.logger()

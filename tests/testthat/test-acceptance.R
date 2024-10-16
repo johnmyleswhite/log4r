@@ -1,4 +1,6 @@
 test_that('Creation', {
+  rlang::local_options(lifecycle_verbosity = "quiet")
+
   logger <- create.logger()
   expect_s3_class(logger, "logger")
 
@@ -7,6 +9,8 @@ test_that('Creation', {
 })
 
 test_that('Logger levels', {
+  rlang::local_options(lifecycle_verbosity = "quiet")
+
   logger <- create.logger()
   logfile(logger) <- file.path('base.log')
 
@@ -29,6 +33,8 @@ test_that('Logger levels', {
 })
 
 test_that('Creation of log file on first log entry', {
+  rlang::local_options(lifecycle_verbosity = "quiet")
+
   logger <- create.logger()
   logfile(logger) <- file.path('base.log')
   level(logger) <- log4r:::DEBUG
@@ -60,6 +66,8 @@ test_that('Creation of log file on first log entry', {
 })
 
 test_that('No creation of log file with insufficient level', {
+  rlang::local_options(lifecycle_verbosity = "quiet")
+
   logger <- create.logger()
   logfile(logger) <- file.path('base.log')
 

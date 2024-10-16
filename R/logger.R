@@ -1,29 +1,3 @@
-#' Creates a logger object.
-#'
-#' @param logfile The full pathname of the file you want log messages to be
-#'   written to.
-#' @param level The level at which the logger is initialized. Will be coerced
-#'   using [as.loglevel()].
-#' @param logformat The format string used when writing messages to the log
-#'   file.
-#' @seealso [loglevel()], [level.logger()]
-#' @examples
-#'
-#' library('log4r')
-#'
-#' logger <- create.logger(logfile = 'debugging.log', level = "DEBUG")
-#' @export create.logger
-create.logger <-
-function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
-{
-  # TODO: Should we issue a deprecation message?
-  out <- logger(
-    threshold = level, appenders = file_appender(file = logfile)
-  )
-  out$logfile <- logfile
-  out
-}
-
 #' Create Logger Objects
 #'
 #' This is the main interface for configuring logging behaviour. We adopt the
@@ -32,10 +6,11 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #' where messages are written, and the **[Layout][layouts]** is the format of
 #' the messages.
 #'
-#' @param threshold The logging threshold level. Messages with a lower priority
-#'   level will be discarded. See [loglevel()].
+#' @param threshold The logging threshold, one of `"DEBUG"`, `"INFO"`, `"WARN"`,
+#'   `"ERROR"`, or `"FATAL"`. Messages with a lower severity than the threshold
+#'   will be discarded.
 #' @param appenders The logging appenders; both single appenders and a `list()`
-#'   of them are supported. See [appenders()].
+#'   of them are supported. See **[Appenders][appenders]**.
 #'
 #' @return An object of class `"logger"`.
 #'
@@ -44,9 +19,9 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #' # "INFO" threshold.
 #' logger <- logger()
 #'
-#' info(logger, "Located nearest gas station.")
-#' warn(logger, "Ez-Gas sensor network is not available.")
-#' debug(logger, "Debug messages are suppressed by default.")
+#' log_info(logger, "Located nearest gas station.")
+#' log_warn(logger, "Ez-Gas sensor network is not available.")
+#' log_debug(logger, "Debug messages are suppressed by default.")
 #'
 #' @seealso
 #'
@@ -55,7 +30,7 @@ function(logfile = 'logfile.log', level = 'FATAL', logformat = NULL)
 #'
 #' @export
 logger <- function(threshold = "INFO", appenders = console_appender()) {
-  threshold <- as.loglevel(threshold)
+  threshold <- as_level(threshold)
   if (!is.list(appenders)) {
     appenders <- list(appenders)
   }

@@ -67,11 +67,11 @@ The following is a typical **log4r** setup:
 log4r_logger <- log4r::logger(threshold = "INFO")
 
 log4r_info <- function() {
-  log4r::info(log4r_logger, "Info message.")
+  log4r::log_info(log4r_logger, "Info message.")
 }
 
 log4r_debug <- function() {
-  log4r::debug(log4r_logger, "Debug message.")
+  log4r::log_debug(log4r_logger, "Debug message.")
 }
 ```
 

@@ -3,6 +3,22 @@
 * `logfmt_log_layout()` and `json_log_layout()` now use timestamps with
   microsecond precision, when possible.
 
+* `debug()`, `info()`, `warn()`, `error()`, and `fatal()` are deprecated in
+  favour of the newly-exported `log_debug()`, `log_info()`, `log_warn()`,
+  `log_error()`, and `log_fatal()`, respectively, though for performance reasons
+  they do not yet issue deprecation warnings when used. These older functions
+  tended to cause namespace issues with other packages or base R itself (#29).
+
+* Much of the pre-0.3.0 logger API is now formally deprecated and issues
+  warnings when used. This includes `create.logger()` and `logfile()`.
+
+* `is.loglevel()`, `as.loglevel()`, its alias `loglevel()`, and S3 generics for
+  the `"loglevel"` class are now considered an implementation detail and are no
+  longer part of the public API. They now issue deprecation warnings when used.
+  Hopefully this makes way for adding a `TRACE` level and corresponding
+  `log_trace()` function in the future. The obscure `verbosity()` function is
+  also now deprecated, for similar reasons.
+
 # log4r 0.4.4
 
 * Fixes failing unit tests for the HTTP appender.
