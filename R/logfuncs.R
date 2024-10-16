@@ -19,7 +19,7 @@ log_at <- function(logger, level, ...) {
   level <- as_level(level)
   if (logger$threshold > level) return(invisible(NULL))
   for (appender in logger$appenders) {
-    appender(level, ...)
+    appender(LEVEL_NAMES[level], ...)
   }
 }
 

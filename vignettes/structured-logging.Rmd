@@ -62,7 +62,7 @@ formats:
 * `logfmt_log_layout`: Emit log messages using the more human-friendly [logfmt](https://brandur.org/logfmt).
 
 To use these formats, you can pass additional arguments to the existing logging
-functions `info()`, `warn()` and `error()`.
+functions `log_info()`, `log_warn()` and `log_error()`.
 
 ## JSON Logs
 
