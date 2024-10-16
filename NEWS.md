@@ -19,6 +19,9 @@
   `log_trace()` function in the future. The obscure `verbosity()` function is
   also now deprecated, for similar reasons.
 
+* Errors have been migrated to `cli::cli_abort()` and are now much friendlier
+  and actionable as a result.
+
 # log4r 0.4.4
 
 * Fixes failing unit tests for the HTTP appender.

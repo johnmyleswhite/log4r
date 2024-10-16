@@ -1,6 +1,6 @@
 test_that("The logger threshold works as expected", {
-  expect_error(logger(threshold = "UNKNOWN"), "unknown logging level")
-  expect_error(logger(threshold = NULL), "must be a string")
+  expect_error(logger(threshold = "UNKNOWN"), "must be one of")
+  expect_error(logger(threshold = NULL), "must be one of")
   lgr <- logger()
   level(lgr) <- "FATAL"
   expect_snapshot(level(lgr))
@@ -28,11 +28,9 @@ test_that("The loglevel() constructor works as expected", {
   expect_equal(loglevel("ERROR"), ERROR)
   expect_equal(loglevel("FATAL"), FATAL)
 
-  expect_error(loglevel("UNLOG"), "unknown logging level: UNLOG")
-  expect_error(loglevel("ATA"), "unknown logging level: ATA")
-  expect_error(loglevel("WAR"), "unknown logging level: WAR")
-  expect_error(loglevel(1:3), "must be a string")
-  expect_error(loglevel(FALSE), "cannot determine")
+  expect_error(loglevel("UNLOG"), "must be one of")
+  expect_error(loglevel(1:3), "must be one of")
+  expect_error(loglevel(FALSE), "must be one of")
 })
 
 test_that("Coercion works as expected", {

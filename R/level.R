@@ -41,22 +41,23 @@ as_level <- function(i) {
     return(i)
   }
 
-  if (length(i) != 1) {
-    stop("The log level must be a string or single integer")
+  idx <- NULL
+  if (length(i) == 1 && is.numeric(i)) {
+    idx <- max(min(i, length(LEVELS)), 1)
+  } else if (length(i) == 1 && is.character(i)) {
+    idx <- which(i == levels(LEVELS))
   }
 
-  if (is.numeric(i)) {
-    i <- min(i, length(LEVELS))
-    i <- max(i, 1)
-  } else if (is.character(i)) {
-    name <- i
-    i <- which(name == levels(LEVELS))
-    if (length(i) == 0)
-      stop("unknown logging level: ", name)
-  } else
-    stop("cannot determine loglevel from ", typeof(i), " ", i)
+  if (length(idx) == 0) {
+    arg <- rlang::caller_arg(i)
+    levels <- cli::cli_vec(LEVEL_NAMES, style = list("vec-last" = ", or "))
+    cli::cli_abort(
+      "{.arg {arg}} must be one of {.str {levels}}.",
+      call = rlang::caller_env()
+    )
+  }
 
-  structure(LEVELS[[i]], class = "loglevel")
+  structure(LEVELS[idx], class = "loglevel")
 }
 
 # Internal constants.

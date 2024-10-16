@@ -17,7 +17,9 @@ License: Artistic-2.0
 URL: https://github.com/johnmyleswhite/log4r
 BugReports: https://github.com/johnmyleswhite/log4r/issues
 Imports:
-    lifecycle
+    cli,
+    lifecycle,
+    rlang
 Suggests:
     futile.logger,
     httr,
@@ -28,7 +30,6 @@ Suggests:
     logging,
     loggit,
     microbenchmark,
-    rlang,
     rlog,
     rmarkdown,
     rsyslog,

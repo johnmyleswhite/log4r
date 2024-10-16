@@ -31,8 +31,7 @@
 #' @aliases default_log_layout
 #' @export
 default_log_layout <- function(time_format = "%Y-%m-%d %H:%M:%S") {
-  stopifnot(is.character(time_format))
-  verify_time_format(time_format)
+  check_time_format(time_format)
   timestamp <- fmt_current_time(time_format, FALSE)
 
   function(level, ...) {
@@ -83,9 +82,7 @@ logfmt_log_layout <- function() {
 #' @aliases json_log_layout
 #' @export
 json_log_layout <- function() {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("The 'jsonlite' package is required to use this JSON layout.")
-  }
+  rlang::check_installed("jsonlite", "to use this JSON layout.")
   timestamp <- fmt_current_time("%Y-%m-%dT%H:%M:%OSZ", TRUE)
 
   function(level, ...) {
@@ -122,10 +119,21 @@ fmt_current_time <- function(format, use_utc = FALSE) {
   })
 }
 
-verify_time_format <- function(time_format) {
-  tryCatch(fmt_current_time(time_format)(), error = function(e) {
-    stop("Invalid strptime format string. See ?strptime.", call. = FALSE)
-  })
+check_time_format <- function(x, arg = rlang::caller_arg(x),
+                              call = rlang::caller_env()) {
+  if (is.character(x)) {
+    tryCatch({
+      fmt_current_time(x)()
+      return(invisible(NULL))
+    }, error = function(e) {})
+  }
+  cli::cli_abort(
+    c(
+      "{.arg {arg}} must be a valid timestamp format string.",
+      "i" = "See {.help strptime} for details on available formats."
+    ),
+    call = call
+  )
 }
 
 encode_logfmt <- function(fields) {

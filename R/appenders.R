@@ -44,7 +44,7 @@ console_appender <- function(layout = default_log_layout()) {
 #' @aliases file_appender
 #' @export
 file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
-  stopifnot(is.function(layout))
+  check_layout(layout)
   layout <- compiler::cmpfun(layout)
   force(file)
   if (!append) {
@@ -74,7 +74,7 @@ file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
 #' @export
 tcp_appender <- function(host, port, layout = default_log_layout(),
                          timeout = getOption("timeout")) {
-  stopifnot(is.function(layout))
+  check_layout(layout)
   layout <- compiler::cmpfun(layout)
   # Use a finalizer pattern to make sure we close the connection.
   env <- new.env(size = 1)
@@ -122,16 +122,14 @@ tcp_appender <- function(host, port, layout = default_log_layout(),
 #' @export
 http_appender <- function(url, method = "POST", layout = default_log_layout(),
                           ...) {
-  if (!requireNamespace("httr", quietly = TRUE)) {
-    stop("The 'httr' package is required to use this HTTP appender.")
-  }
-  stopifnot(is.function(layout))
+  rlang::check_installed("httr", "to use this HTTP appender.")
+  check_layout(layout)
   layout <- compiler::cmpfun(layout)
 
   tryCatch({
     verb <- get(method, envir = asNamespace("httr"))
   }, error = function(e) {
-    stop("'", method, "' is not a supported HTTP method.", call. = FALSE)
+    cli::cli_abort("{.str {method}} is not a supported HTTP method.")
   })
   args <- c(list(url = url), list(...))
   function(level, ...) {
@@ -140,7 +138,7 @@ http_appender <- function(url, method = "POST", layout = default_log_layout(),
 
     # Treat HTTP errors as actual errors.
     if (httr::status_code(resp) >= 400) {
-      stop("Server responded with error ", httr::status_code(resp), ".")
+      cli::cli_abort("Server responded with error {.code {resp}}.")
     }
   }
 }
@@ -158,10 +156,8 @@ http_appender <- function(url, method = "POST", layout = default_log_layout(),
 #'
 #' @export
 syslog_appender <- function(identifier, layout = bare_log_layout(), ...) {
-  if (!requireNamespace("rsyslog", quietly = TRUE)) {
-    stop("The 'rsyslog' package is required to use this syslog appender.")
-  }
-  stopifnot(is.function(layout))
+  rlang::check_installed("rsyslog", "to use this syslog appender.")
+  check_layout(layout)
   layout <- compiler::cmpfun(layout)
 
   rsyslog::open_syslog(identifier = identifier, ...)
@@ -180,4 +176,12 @@ syslog_appender <- function(identifier, layout = bare_log_layout(), ...) {
     )
     rsyslog::syslog(msg, level = syslog_level)
   }
+}
+
+check_layout <- function(x, arg = rlang::caller_arg(x),
+                         call = rlang::caller_env()) {
+  if (is.function(x)) {
+    return(invisible(NULL))
+  }
+  cli::cli_abort("{.arg {arg}} must be a function.", call = call)
 }

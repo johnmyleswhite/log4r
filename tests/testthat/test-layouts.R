@@ -57,5 +57,8 @@ test_that("JSON layouts work correctly", {
 })
 
 test_that("Wonky times formats are caught early", {
-  expect_error(default_log_layout(strrep("%Y", 30)), regex = "Invalid")
+  expect_error(
+    default_log_layout(strrep("%Y", 30)),
+    regexp = "must be a valid timestamp format string"
+  )
 })
