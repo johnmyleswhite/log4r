@@ -35,7 +35,7 @@ logger <- function(threshold = "INFO", appenders = console_appender()) {
     appenders <- list(appenders)
   }
   if (!all(vapply(appenders, is.function, logical(1)))) {
-    stop("Appenders must be functions.", call. = FALSE)
+    cli::cli_abort("{.arg appenders} must be a function or list of functions.")
   }
   appenders <- lapply(appenders, compiler::cmpfun)
   structure(
