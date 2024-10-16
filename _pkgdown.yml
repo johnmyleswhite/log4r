@@ -1,0 +1,24 @@
+url: https://log4r.r-lib.org
+template:
+  package: tidytemplate
+  bootstrap: 5
+  includes:
+    in_header: |
+      <script defer data-domain="log4r.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+development:
+  mode: auto
+reference:
+- title: Basics
+  contents:
+  - logger
+  - log_at
+- title: Appenders
+  contents:
+  - appenders
+  - syslog_appender
+  - http_appender
+  - tcp_appender
+- title: Layouts
+  contents: layouts
+- title: Advanced
+  contents: level

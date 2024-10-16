@@ -7,3 +7,4 @@ upload.sh
 src/*.o
 src/*.so
 inst/doc
+docs
