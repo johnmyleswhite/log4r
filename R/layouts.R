@@ -1,22 +1,30 @@
-#' Layouts
+#' Format logs with Layouts
 #'
 #' @description
 #'
 #' In [log4j](https://logging.apache.org/log4j/) etymology, **Layouts** are how
-#' **[Appenders][appenders]** control the format of messages.
+#' **[Appenders][appenders]** control the format of messages. Most users will
+#' use one of the general-purpose layouts provided by the package:
 #'
-#' Some general-purpose layouts are described below.
+#' * [default_log_layout()] formats messages much like the original log4j
+#'   library. [simple_log_layout()] does the same, but omits the timestamp.
+#'
+#' * [bare_log_layout()] emits only the log message, with no level or timestamp
+#'   fields.
+#'
+#' * [logfmt_log_layout()] and [json_log_layout()] format structured logs in the
+#'   two most popular machine-readable formats.
 #'
 #' For implementing your own layouts, see Details.
 #'
 #' @details
 #'
-#' Layouts are implemented as functions with the interface
-#' `function(level, ...)` and returning a single string.
+#' Layouts return a function with the signature `function(level, ...)` that
+#' itself returns a single newline-terminated string. Anything that meets this
+#' interface can be passed as a layout to one of the existing [appenders].
 #'
 #' @param time_format A valid format string for timestamps. See
-#'   [base::strptime()]. For some layouts this can be `NA` to elide the
-#'   timestamp.
+#'   [base::strptime()].
 #'
 #' @examples
 #' # The behaviour of a layout can be seen by using them directly:
@@ -26,9 +34,10 @@
 #' with_timestamp <- default_log_layout()
 #' with_timestamp("INFO", "Input has length ", 0, ".")
 #'
+#' logfmt <- logfmt_log_layout()
+#' logfmt("INFO", msg = "got input", length = 24)
 #' @name layouts
 #' @rdname layouts
-#' @aliases default_log_layout
 #' @export
 default_log_layout <- function(time_format = "%Y-%m-%d %H:%M:%S") {
   check_time_format(time_format)

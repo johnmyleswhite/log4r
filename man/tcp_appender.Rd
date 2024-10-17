@@ -2,7 +2,7 @@
 % Please edit documentation in R/appenders.R
 \name{tcp_appender}
 \alias{tcp_appender}
-\title{Log Messages via TCP}
+\title{Send logs over TCP}
 \usage{
 tcp_appender(
   host,
@@ -25,7 +25,7 @@ additional arguments corresponding to the message.}
 Append messages to arbitrary TCP destinations.
 }
 \seealso{
-\code{\link[=appenders]{appenders()}} for more information on Appenders, and
+\link{appenders} for more information on Appenders, and
 \code{\link[base:connections]{base::socketConnection()}} for the underlying connection object
-used by \code{tcp_appender}.
+used by \code{\link[=tcp_appender]{tcp_appender()}}.
 }
