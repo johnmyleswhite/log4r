@@ -14,7 +14,7 @@ Description: The log4r package is meant to provide a fast, lightweight,
   object-oriented approach to logging in R based on the widely-emulated
   'log4j' system and etymology.
 License: Artistic-2.0
-URL: https://github.com/johnmyleswhite/log4r
+URL: https://github.com/johnmyleswhite/log4r, https://log4r.r-lib.org
 BugReports: https://github.com/johnmyleswhite/log4r/issues
 Imports:
     cli,
@@ -48,3 +48,4 @@ Collate:
     'level.R'
     'log4r-package.R'
     'logger.R'
+Config/Needs/website: tidyverse/tidytemplate
