@@ -7,7 +7,7 @@
 \alias{bare_log_layout}
 \alias{logfmt_log_layout}
 \alias{json_log_layout}
-\title{Layouts}
+\title{Format logs with Layouts}
 \usage{
 default_log_layout(time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
 
@@ -21,20 +21,27 @@ json_log_layout()
 }
 \arguments{
 \item{time_format}{A valid format string for timestamps. See
-\code{\link[base:strptime]{base::strptime()}}. For some layouts this can be \code{NA} to elide the
-timestamp.}
+\code{\link[base:strptime]{base::strptime()}}.}
 }
 \description{
 In \href{https://logging.apache.org/log4j/}{log4j} etymology, \strong{Layouts} are how
-\strong{\link[=appenders]{Appenders}} control the format of messages.
-
-Some general-purpose layouts are described below.
+\strong{\link[=appenders]{Appenders}} control the format of messages. Most users will
+use one of the general-purpose layouts provided by the package:
+\itemize{
+\item \code{\link[=default_log_layout]{default_log_layout()}} formats messages much like the original log4j
+library. \code{\link[=simple_log_layout]{simple_log_layout()}} does the same, but omits the timestamp.
+\item \code{\link[=bare_log_layout]{bare_log_layout()}} emits only the log message, with no level or timestamp
+fields.
+\item \code{\link[=logfmt_log_layout]{logfmt_log_layout()}} and \code{\link[=json_log_layout]{json_log_layout()}} format structured logs in the
+two most popular machine-readable formats.
+}
 
 For implementing your own layouts, see Details.
 }
 \details{
-Layouts are implemented as functions with the interface
-\verb{function(level, ...)} and returning a single string.
+Layouts return a function with the signature \verb{function(level, ...)} that
+itself returns a single newline-terminated string. Anything that meets this
+interface can be passed as a layout to one of the existing \link{appenders}.
 
 \code{json_log_layout} requires the \code{jsonlite} package.
 }
@@ -46,4 +53,6 @@ simple("INFO", "Input has length ", 0, ".")
 with_timestamp <- default_log_layout()
 with_timestamp("INFO", "Input has length ", 0, ".")
 
+logfmt <- logfmt_log_layout()
+logfmt("INFO", msg = "got input", length = 24)
 }

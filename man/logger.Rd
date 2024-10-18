@@ -2,13 +2,13 @@
 % Please edit documentation in R/logger.R
 \name{logger}
 \alias{logger}
-\title{Create Logger Objects}
+\title{Create a logger}
 \usage{
 logger(threshold = "INFO", appenders = console_appender())
 }
 \arguments{
 \item{threshold}{The logging threshold, one of \code{"DEBUG"}, \code{"INFO"}, \code{"WARN"},
-\code{"ERROR"}, or \code{"FATAL"}. Messages with a lower severity than the threshold
+\code{"ERROR"}, or \code{"FATAL"}. Logs with a lower severity than the threshold
 will be discarded.}
 
 \item{appenders}{The logging appenders; both single appenders and a \code{list()}
@@ -21,18 +21,16 @@ An object of class \code{"logger"}.
 This is the main interface for configuring logging behaviour. We adopt the
 well-known \href{https://logging.apache.org/log4j/}{log4j} etymology:
 \strong{\link[=appenders]{Appenders}} are destinations (e.g. the console or a file)
-where messages are written, and the \strong{\link[=layouts]{Layout}} is the format of
-the messages.
+where logs are written, and the \strong{\link[=layouts]{Layout}} is the format of
+these logs.
 }
 \examples{
-# By default, messages are logged to the console at the
-# "INFO" threshold.
+# By default, logs are written to the console at the "INFO" threshold.
 logger <- logger()
 
 log_info(logger, "Located nearest gas station.")
 log_warn(logger, "Ez-Gas sensor network is not available.")
 log_debug(logger, "Debug messages are suppressed by default.")
-
 }
 \seealso{
 \strong{\link[=appenders]{Appenders}} and \strong{\link[=layouts]{Layouts}} for information on

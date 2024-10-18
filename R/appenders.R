@@ -1,13 +1,12 @@
-#' Appenders
+#' Send logs to their final destination with Appenders
 #'
 #' @description
 #'
 #' In [log4j](https://logging.apache.org/log4j/) etymology, **Appenders** are
-#' destinations where messages are written. Depending on the nature of the
-#' destination, the format of the messages may be controlled using a
-#' **[Layout][layouts]**.
+#' destinations where logs are written. Appenders have no control over
+#' formatting; this is controlled by the **[Layout][layouts]**.
 #'
-#' The most basic appenders log messages to the console or to a file; these are
+#' The most basic appenders write logs to the console or to a file; these are
 #' described below.
 #'
 #' For implementing your own appenders, see Details.
@@ -26,11 +25,9 @@
 #' # following snippet will write the message to the console.
 #' appender <- console_appender()
 #' appender("INFO", "Input has length ", 0, ".")
-#'
 #' @seealso [tcp_appender()], [http_appender()], [syslog_appender()]
 #' @name appenders
 #' @rdname appenders
-#' @aliases console_appender
 #' @export
 console_appender <- function(layout = default_log_layout()) {
   file_appender(file = "", layout = layout)
@@ -41,7 +38,6 @@ console_appender <- function(layout = default_log_layout()) {
 #'   the first time.
 #'
 #' @rdname appenders
-#' @aliases file_appender
 #' @export
 file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
   check_layout(layout)
@@ -57,7 +53,7 @@ file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
   }
 }
 
-#' Log Messages via TCP
+#' Send logs over TCP
 #'
 #' Append messages to arbitrary TCP destinations.
 #'
@@ -67,9 +63,9 @@ file_appender <- function(file, append = TRUE, layout = default_log_layout()) {
 #'   additional arguments corresponding to the message.
 #' @param timeout Timeout for the connection.
 #'
-#' @seealso [appenders()] for more information on Appenders, and
+#' @seealso [appenders] for more information on Appenders, and
 #'   [base::socketConnection()] for the underlying connection object
-#'   used by `tcp_appender`.
+#'   used by [tcp_appender()].
 #'
 #' @export
 tcp_appender <- function(host, port, layout = default_log_layout(),
@@ -88,11 +84,11 @@ tcp_appender <- function(host, port, layout = default_log_layout(),
   }
 }
 
-#' Log Messages via HTTP
+#' Send logs over HTTP
 #'
 #' @description
 #'
-#' Send messages in the body of HTTP requests. Responses with status code 400
+#' Send logs in the body of HTTP requests. Responses with status code 400
 #' or above will trigger errors.
 #'
 #' Requires the `httr` package.
@@ -116,8 +112,7 @@ tcp_appender <- function(host, port, layout = default_log_layout(),
 #' )
 #' appender("INFO", "Message.")
 #' }
-#'
-#' @seealso [appenders()] for more information on Appenders.
+#' @seealso [appenders] for more information on Appenders.
 #'
 #' @export
 http_appender <- function(url, method = "POST", layout = default_log_layout(),
@@ -143,7 +138,7 @@ http_appender <- function(url, method = "POST", layout = default_log_layout(),
   }
 }
 
-#' Log Messages to the Local Syslog
+#' Send logs to the local syslog
 #'
 #' Send messages to the local syslog. Requires the `rsyslog` package.
 #'
@@ -152,7 +147,7 @@ http_appender <- function(url, method = "POST", layout = default_log_layout(),
 #'   additional arguments corresponding to the message.
 #' @param ... Further arguments passed on to [rsyslog::open_syslog()].
 #'
-#' @seealso [appenders()] for more information on Appenders.
+#' @seealso [appenders] for more information on Appenders.
 #'
 #' @export
 syslog_appender <- function(identifier, layout = bare_log_layout(), ...) {

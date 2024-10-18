@@ -2,7 +2,7 @@
 % Please edit documentation in R/appenders.R
 \name{http_appender}
 \alias{http_appender}
-\title{Log Messages via HTTP}
+\title{Send logs over HTTP}
 \usage{
 http_appender(url, method = "POST", layout = default_log_layout(), ...)
 }
@@ -17,7 +17,7 @@ additional arguments corresponding to the message.}
 \item{...}{Further arguments passed on to \code{\link[httr:POST]{httr::POST()}}.}
 }
 \description{
-Send messages in the body of HTTP requests. Responses with status code 400
+Send logs in the body of HTTP requests. Responses with status code 400
 or above will trigger errors.
 
 Requires the \code{httr} package.
@@ -35,8 +35,7 @@ appender <- http_appender(
 )
 appender("INFO", "Message.")
 }
-
 }
 \seealso{
-\code{\link[=appenders]{appenders()}} for more information on Appenders.
+\link{appenders} for more information on Appenders.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/appenders.R
 \name{syslog_appender}
 \alias{syslog_appender}
-\title{Log Messages to the Local Syslog}
+\title{Send logs to the local syslog}
 \usage{
 syslog_appender(identifier, layout = bare_log_layout(), ...)
 }
@@ -18,5 +18,5 @@ additional arguments corresponding to the message.}
 Send messages to the local syslog. Requires the \code{rsyslog} package.
 }
 \seealso{
-\code{\link[=appenders]{appenders()}} for more information on Appenders.
+\link{appenders} for more information on Appenders.
 }

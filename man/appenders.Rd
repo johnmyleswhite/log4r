@@ -4,7 +4,7 @@
 \alias{appenders}
 \alias{console_appender}
 \alias{file_appender}
-\title{Appenders}
+\title{Send logs to their final destination with Appenders}
 \usage{
 console_appender(layout = default_log_layout())
 
@@ -21,11 +21,10 @@ the first time.}
 }
 \description{
 In \href{https://logging.apache.org/log4j/}{log4j} etymology, \strong{Appenders} are
-destinations where messages are written. Depending on the nature of the
-destination, the format of the messages may be controlled using a
-\strong{\link[=layouts]{Layout}}.
+destinations where logs are written. Appenders have no control over
+formatting; this is controlled by the \strong{\link[=layouts]{Layout}}.
 
-The most basic appenders log messages to the console or to a file; these are
+The most basic appenders write logs to the console or to a file; these are
 described below.
 
 For implementing your own appenders, see Details.
@@ -39,7 +38,6 @@ and return \code{invisible(NULL)}.
 # following snippet will write the message to the console.
 appender <- console_appender()
 appender("INFO", "Input has length ", 0, ".")
-
 }
 \seealso{
 \code{\link[=tcp_appender]{tcp_appender()}}, \code{\link[=http_appender]{http_appender()}}, \code{\link[=syslog_appender]{syslog_appender()}}
